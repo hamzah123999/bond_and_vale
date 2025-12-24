@@ -3,12 +3,13 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-type Media = { type: "image" | "video"; src: string; poster?: string };
-type Tab = { title: string; body: string; media: Media[] };
+export type Media = { type: "image" | "video"; src: string; poster?: string };
+export type Tab = { title: string; body: string; media: Media[] };
 
 function clamp(n: number, min: number, max: number) {
     return Math.max(min, Math.min(max, n));
 }
+
 
 export default function ScrollTabsSection({
     tabs,

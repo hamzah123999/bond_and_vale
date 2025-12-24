@@ -15,7 +15,7 @@ import TestimonialsSlider from '@/components/TestimonialsSlider';
 import Wrapper from '@/app/Wrapper';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import ScrollTabsSection from '@/components/ScrollTabsSection';
+import ScrollTabsSection, { Tab } from '@/components/ScrollTabsSection';
 
 export default function HomePage() {
   const handleAnimationComplete = () => {
@@ -31,7 +31,7 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const tabs = [
+  const tabs: Tab[] = [
     {
       title: "PAY ON SUCCESS MODEL",
       body:
