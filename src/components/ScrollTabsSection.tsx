@@ -4,23 +4,31 @@ import React, { useRef, useState, useEffect, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export type Media = { type: "image" | "video"; src: string; poster?: string };
-export type Tab = { title: string; body: string; media: Media[] };
+export type Tab = {
+    title: string;
+    body: string;
+    media: Media[];
+    videos?: Partial<Record<0 | 1 | 2, Omit<Media, "type">>>;
+};
 
 function clamp(n: number, min: number, max: number) {
     return Math.max(min, Math.min(max, n));
 }
 
-
 export default function ScrollTabsSection({
     tabs,
     className = "",
     lastTabHold = 2,
-    featuredIndex = 1, // 0 | 1 | 2  (middle by default)
+    featuredIndex = 1,
+    videoWhenActive = true,
+    playIndexMode = "byTab",
 }: {
     tabs: Tab[];
     className?: string;
     lastTabHold?: number;
     featuredIndex?: 0 | 1 | 2;
+    videoWhenActive?: boolean;
+    playIndexMode?: "byTab" | "featured";
 }) {
     const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -58,7 +66,25 @@ export default function ScrollTabsSection({
     const dotY = useTransform(scrollYProgress, [0, 1], ["8%", "92%"]);
 
     const current = tabs[clamp(active, 0, totalTabs - 1)];
-    const media = (current?.media ?? []).slice(0, 3);
+    const baseMedia = (current?.media ?? []).slice(0, 3);
+
+    const resolvedMedia = useMemo(() => {
+        return baseMedia.map((m, i) => {
+            const idx = i as 0 | 1 | 2;
+            const v = current?.videos?.[idx];
+            if (!videoWhenActive || !v) return m;
+            return { type: "video" as const, src: v.src, poster: v.poster };
+        });
+    }, [baseMedia, current?.videos, videoWhenActive]);
+
+    const featured = clamp(featuredIndex, 0, 2) as 0 | 1 | 2;
+
+    const playIndex = useMemo(() => {
+        if (playIndexMode === "featured") return featured;
+        return clamp(active, 0, 2) as 0 | 1 | 2;
+    }, [playIndexMode, featured, active]);
+
+    const mobileMedia = resolvedMedia[playIndex];
 
     return (
         <section
@@ -77,7 +103,7 @@ export default function ScrollTabsSection({
                                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                                 className="max-w-4xl"
                             >
-                                <h3 className="md:pt-16  font-[PPPangaia] uppercase leading-[0.9] tracking-wide text-[clamp(2rem,6vw,3.5rem)]">
+                                <h3 className="md:pt-16 font-[PPPangaia] uppercase leading-[0.9] tracking-wide text-[clamp(2rem,6vw,3.5rem)]">
                                     {current.title}
                                 </h3>
 
@@ -87,26 +113,21 @@ export default function ScrollTabsSection({
                             </motion.div>
 
                             <div className="mt-auto pt-10">
-                                {/* Mobile: 1 big + 2 small */}
-                                <div className="grid gap-4 md:hidden">
-                                    <FeaturedCard m={media[featuredIndex]} />
-
-                                    <div className="grid grid-cols-2 gap-4">
-                                        {media
-                                            .filter((_, idx) => idx !== featuredIndex)
-                                            .map((m, i) => (
-                                                <SmallCard key={`m-${active}-${i}`} m={m} />
-                                            ))}
-                                    </div>
+                                {/* Mobile: show ONLY the active video/card */}
+                                <div className="md:hidden">
+                                    <MediaFrame featured className="h-[22rem]">
+                                        <MediaContent m={mobileMedia} play />
+                                    </MediaFrame>
                                 </div>
 
-                                {/* Desktop: 3 equal cards, featured looks bigger */}
+                                {/* Desktop: 3 cards */}
                                 <div className="hidden md:grid grid-cols-3 gap-4 lg:gap-6">
-                                    {media.map((m, i) => (
+                                    {resolvedMedia.map((m, i) => (
                                         <MediaCard
                                             key={`${active}-${i}`}
                                             m={m}
-                                            featured={i === featuredIndex}
+                                            featured={i === featured}
+                                            play={i === playIndex}
                                         />
                                     ))}
                                 </div>
@@ -171,16 +192,32 @@ function MediaFrame({
     );
 }
 
-function MediaContent({ m }: { m?: Media }) {
+function MediaContent({ m, play }: { m?: Media; play: boolean }) {
+    const vref = useRef<HTMLVideoElement | null>(null);
+
+    useEffect(() => {
+        const el = vref.current;
+        if (!el) return;
+
+        if (!play) {
+            el.pause();
+            el.currentTime = 0;
+            return;
+        }
+
+        const p = el.play();
+        if (p && typeof (p as any).catch === "function") (p as any).catch(() => { });
+    }, [play]);
+
     if (!m) return null;
 
     if (m.type === "video") {
         return (
             <video
+                ref={vref}
                 className="h-full w-full object-cover"
                 src={m.src}
                 poster={m.poster}
-                autoPlay
                 muted
                 loop
                 playsInline
@@ -189,36 +226,13 @@ function MediaContent({ m }: { m?: Media }) {
         );
     }
 
-    return (
-        <img
-            className="h-full w-full object-cover"
-            src={m.src}
-            alt="media"
-            loading="lazy"
-        />
-    );
+    return <img className="h-full w-full object-cover" src={m.src} alt="media" loading="lazy" />;
 }
 
-function MediaCard({ m, featured }: { m: Media; featured: boolean }) {
+function MediaCard({ m, featured, play }: { m: Media; featured: boolean; play: boolean }) {
     return (
         <MediaFrame featured={featured} className="h-[22rem] lg:h-[26rem]">
-            <MediaContent m={m} />
-        </MediaFrame>
-    );
-}
-
-function FeaturedCard({ m }: { m?: Media }) {
-    return (
-        <MediaFrame featured className="h-[22rem]">
-            <MediaContent m={m} />
-        </MediaFrame>
-    );
-}
-
-function SmallCard({ m }: { m?: Media }) {
-    return (
-        <MediaFrame className="h-[11.5rem] opacity-95">
-            <MediaContent m={m} />
+            <MediaContent m={m} play={play} />
         </MediaFrame>
     );
 }
