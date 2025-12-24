@@ -10,6 +10,25 @@ import { authClient } from "@/lib/auth-client";
 import TabLoader from "@/components/Loader";
 
 export default function AdminLoginPage() {
+
+    // const signup = async () => {
+    //     const { data, error } = await authClient.signUp.email({
+    //         name: "Bond And Vale",
+    //         email: "",
+    //         password: "",
+    //     });
+
+    //     if (error) {
+    //         console.error(error.message);
+    //         return;
+    //     }
+
+    //     console.log("Created:", data);
+    // };
+
+    // signup();
+
+
     const router = useRouter();
 
     const [showPass, setShowPass] = useState(false);
@@ -79,6 +98,9 @@ export default function AdminLoginPage() {
             </Wrapper>
         );
     }
+
+
+
 
     return (
         <Wrapper>

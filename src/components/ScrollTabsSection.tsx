@@ -1,19 +1,10 @@
 "use client";
 
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-type Media = {
-    type: "image" | "video";
-    src: string;
-    poster?: string; // for video
-};
-
-type Tab = {
-    title: string;
-    body: string;
-    media: Media[]; // 3 items
-};
+type Media = { type: "image" | "video"; src: string; poster?: string };
+type Tab = { title: string; body: string; media: Media[] };
 
 function clamp(n: number, min: number, max: number) {
     return Math.max(min, Math.min(max, n));
@@ -22,23 +13,39 @@ function clamp(n: number, min: number, max: number) {
 export default function ScrollTabsSection({
     tabs,
     className = "",
+    lastTabHold = 2,
+    featuredIndex = 1, // 0 | 1 | 2  (middle by default)
 }: {
     tabs: Tab[];
     className?: string;
+    lastTabHold?: number;
+    featuredIndex?: 0 | 1 | 2;
 }) {
     const sectionRef = useRef<HTMLDivElement>(null);
 
-    // section scroll progress 0..1 across full section height
     const { scrollYProgress } = useScroll({
         target: sectionRef,
         offset: ["start start", "end start"],
     });
 
-    const total = Math.max(1, tabs.length);
-    // map progress -> active index (0..tabs-1)
-    const activeIndexMotion = useTransform(scrollYProgress, (p) =>
-        clamp(Math.round(p * (total - 1)), 0, total - 1)
-    );
+    const totalTabs = Math.max(1, tabs.length);
+
+    const { totalWeight, cumulative } = useMemo(() => {
+        const weights = tabs.map((_, i) => (i === totalTabs - 1 ? lastTabHold : 1));
+        const tw = weights.reduce((a, b) => a + b, 0);
+
+        const cum: number[] = [0];
+        for (let i = 0; i < weights.length; i++) cum.push(cum[i] + weights[i] / tw);
+
+        return { totalWeight: tw, cumulative: cum };
+    }, [tabs, totalTabs, lastTabHold]);
+
+    const activeIndexMotion = useTransform(scrollYProgress, (p) => {
+        for (let i = 0; i < totalTabs; i++) {
+            if (p >= cumulative[i] && p < cumulative[i + 1]) return i;
+        }
+        return totalTabs - 1;
+    });
 
     const [active, setActive] = useState(0);
 
@@ -47,28 +54,21 @@ export default function ScrollTabsSection({
         return () => unsub();
     }, [activeIndexMotion]);
 
-    // dot position along the right rail
     const dotY = useTransform(scrollYProgress, [0, 1], ["8%", "92%"]);
 
-    const current = tabs[active];
+    const current = tabs[clamp(active, 0, totalTabs - 1)];
+    const media = (current?.media ?? []).slice(0, 3);
 
     return (
         <section
             ref={sectionRef}
-            className={[
-                "relative bg-[#e6d7c4] text-[#23352d]",
-                // make it “scroll-driven”: each tab roughly gets one viewport
-                "h-[calc(100dvh*3)] md:h-[calc(100dvh*3.2)]", // adjust if tabs length differs
-                className,
-            ].join(" ")}
+            className={["relative bg-[#e6d7c4] text-[#23352d]", className].join(" ")}
+            style={{ height: `calc(100dvh * ${totalWeight})` }}
         >
-            {/* sticky viewport */}
             <div className="sticky top-0 min-h-[100dvh] w-full overflow-hidden">
                 <div className="mx-auto h-full w-full max-w-[1400px] px-6 lg:px-14 py-12 lg:py-16">
                     <div className="relative grid h-full grid-cols-1 lg:grid-cols-[1fr_auto] gap-10">
-                        {/* LEFT CONTENT */}
                         <div className="flex h-full flex-col">
-                            {/* animated text block */}
                             <motion.div
                                 key={active}
                                 initial={{ opacity: 0, y: 18 }}
@@ -76,7 +76,7 @@ export default function ScrollTabsSection({
                                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                                 className="max-w-4xl"
                             >
-                                <h3 className="font-serif leading-[0.9] tracking-wide text-[clamp(44px,6vw,90px)]">
+                                <h3 className="md:pt-16  font-[PPPangaia] uppercase leading-[0.9] tracking-wide text-[clamp(2rem,6vw,3.5rem)]">
                                     {current.title}
                                 </h3>
 
@@ -85,52 +85,33 @@ export default function ScrollTabsSection({
                                 </p>
                             </motion.div>
 
-                            {/* MEDIA GRID */}
                             <div className="mt-auto pt-10">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
-                                    {current.media.map((m, i) => (
-                                        <motion.div
-                                            key={`${active}-${i}`}
-                                            initial={{ opacity: 0, y: 14, scale: 0.98 }}
-                                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                                            transition={{
-                                                duration: 0.55,
-                                                delay: 0.05 + i * 0.06,
-                                                ease: [0.22, 1, 0.36, 1],
-                                            }}
-                                            className={`relative overflow-hidden border border-black/15 bg-white/10 ${i === 0 ? "h-80"
-                                                : i === 1 ? "h-96"
-                                                    : "h-[28rem]"}`}
-                                        >
-                                            {m.type === "video" ? (
-                                                <video
-                                                    className="h-full w-full object-cover"
-                                                    src={m.src}
-                                                    poster={m.poster}
-                                                    autoPlay
-                                                    muted
-                                                    loop
-                                                    playsInline
-                                                    preload="metadata"
-                                                />
-                                            ) : (
-                                                <img
-                                                    className="h-full w-full object-cover"
-                                                    src={m.src}
-                                                    alt="media"
-                                                    loading="lazy"
-                                                />
-                                            )}
+                                {/* Mobile: 1 big + 2 small */}
+                                <div className="grid gap-4 md:hidden">
+                                    <FeaturedCard m={media[featuredIndex]} />
 
-                                            {/* subtle hover */}
-                                            <div className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/10" />
-                                        </motion.div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        {media
+                                            .filter((_, idx) => idx !== featuredIndex)
+                                            .map((m, i) => (
+                                                <SmallCard key={`m-${active}-${i}`} m={m} />
+                                            ))}
+                                    </div>
+                                </div>
+
+                                {/* Desktop: 3 equal cards, featured looks bigger */}
+                                <div className="hidden md:grid grid-cols-3 gap-4 lg:gap-6">
+                                    {media.map((m, i) => (
+                                        <MediaCard
+                                            key={`${active}-${i}`}
+                                            m={m}
+                                            featured={i === featuredIndex}
+                                        />
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        {/* RIGHT SCROLL INDICATOR */}
                         <div className="hidden lg:flex items-center justify-center">
                             <div className="relative h-[70vh] w-[3px] rounded-full bg-black/10">
                                 <motion.div
@@ -140,7 +121,6 @@ export default function ScrollTabsSection({
                             </div>
                         </div>
 
-                        {/* small “tab labels” (optional) */}
                         <div className="hidden lg:block absolute right-10 top-10">
                             <div className="flex flex-col gap-3 text-xs uppercase tracking-widest text-[#23352d]/60">
                                 {tabs.map((t, idx) => (
@@ -156,10 +136,88 @@ export default function ScrollTabsSection({
                                 ))}
                             </div>
                         </div>
-                        {/* end */}
                     </div>
                 </div>
             </div>
         </section>
+    );
+}
+
+function MediaFrame({
+    children,
+    featured,
+    className = "",
+}: {
+    children: React.ReactNode;
+    featured?: boolean;
+    className?: string;
+}) {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 14, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: featured ? 1.04 : 1 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className={[
+                "relative overflow-hidden border border-black/15 bg-white/10",
+                "rounded-none",
+                featured ? "shadow-lg ring-1 ring-[#23352d]/30" : "opacity-90",
+                className,
+            ].join(" ")}
+        >
+            {children}
+            <div className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black/10" />
+        </motion.div>
+    );
+}
+
+function MediaContent({ m }: { m?: Media }) {
+    if (!m) return null;
+
+    if (m.type === "video") {
+        return (
+            <video
+                className="h-full w-full object-cover"
+                src={m.src}
+                poster={m.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+            />
+        );
+    }
+
+    return (
+        <img
+            className="h-full w-full object-cover"
+            src={m.src}
+            alt="media"
+            loading="lazy"
+        />
+    );
+}
+
+function MediaCard({ m, featured }: { m: Media; featured: boolean }) {
+    return (
+        <MediaFrame featured={featured} className="h-[22rem] lg:h-[26rem]">
+            <MediaContent m={m} />
+        </MediaFrame>
+    );
+}
+
+function FeaturedCard({ m }: { m?: Media }) {
+    return (
+        <MediaFrame featured className="h-[22rem]">
+            <MediaContent m={m} />
+        </MediaFrame>
+    );
+}
+
+function SmallCard({ m }: { m?: Media }) {
+    return (
+        <MediaFrame className="h-[11.5rem] opacity-95">
+            <MediaContent m={m} />
+        </MediaFrame>
     );
 }

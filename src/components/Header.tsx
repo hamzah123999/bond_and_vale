@@ -139,7 +139,7 @@ export default function Header() {
               alt="Logo TA Creatives &amp; Design"
               width={200}
               height={200}
-              className={`w-auto ${!changeColor ? "invert brightness-0" : ""} `}
+              className={`w-auto h-12 ${!changeColor ? "invert brightness-0" : ""} `}
             />
             {/* <Image
               src="/ylogoicon.svg"
