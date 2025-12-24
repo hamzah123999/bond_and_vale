@@ -84,7 +84,12 @@ export default function ScrollTabsSection({
         return clamp(active, 0, 2) as 0 | 1 | 2;
     }, [playIndexMode, featured, active]);
 
-    const mobileMedia = resolvedMedia[playIndex];
+    // ✅ Mobile should ALWAYS prefer the actual video source for playIndex
+    const mobileMedia: Media | undefined = useMemo(() => {
+        const v = current?.videos?.[playIndex];
+        if (v) return { type: "video", src: v.src, poster: v.poster };
+        return resolvedMedia[playIndex];
+    }, [current?.videos, playIndex, resolvedMedia]);
 
     return (
         <section
@@ -113,7 +118,7 @@ export default function ScrollTabsSection({
                             </motion.div>
 
                             <div className="mt-auto pt-10">
-                                {/* Mobile: show ONLY the active video/card */}
+                                {/* ✅ Mobile: only ONE card and it plays the video */}
                                 <div className="md:hidden">
                                     <MediaFrame featured className="h-[22rem]">
                                         <MediaContent m={mobileMedia} play />
@@ -207,7 +212,7 @@ function MediaContent({ m, play }: { m?: Media; play: boolean }) {
 
         const p = el.play();
         if (p && typeof (p as any).catch === "function") (p as any).catch(() => { });
-    }, [play]);
+    }, [play, m?.src]);
 
     if (!m) return null;
 
