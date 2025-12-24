@@ -98,12 +98,11 @@ export default function ScrollTabsSection({
         exit: (d: number) => ({ x: d > 0 ? -70 : 70, opacity: 1 }),
     };
 
-    // ✅ Make featured "wider" by changing grid columns:
-    // active 0 => "2fr 1fr 1fr"
-    // active 1 => "1fr 2fr 1fr"
-    // active 2 => "1fr 1fr 2fr"
     const gridCols =
         playIndex === 0 ? "2fr 1fr 1fr" : playIndex === 1 ? "1fr 2fr 1fr" : "1fr 1fr 2fr";
+
+    // ✅ Mobile should show ONLY the active media (video if present)
+    const mobileMedia = resolvedMedia[playIndex];
 
     return (
         <section
@@ -138,35 +137,19 @@ export default function ScrollTabsSection({
                             </div>
 
                             <div className="mt-auto pt-10">
-                                {/* Mobile: big playing + 2 small */}
+                                {/* ✅ Mobile: ONLY ONE video/card (active) */}
                                 <div className="md:hidden">
-                                    <div className="grid gap-4">
-                                        <Card m={resolvedMedia[playIndex]} big play />
-
-                                        <div className="grid grid-cols-2 gap-4">
-                                            {resolvedMedia
-                                                .map((m, i) => ({ m, i }))
-                                                .filter((x) => x.i !== playIndex)
-                                                .map(({ m, i }) => (
-                                                    <Card key={`mob-${active}-${i}`} m={m} big={false} play={false} />
-                                                ))}
-                                        </div>
-                                    </div>
+                                    <Card m={mobileMedia} big play />
                                 </div>
 
-                                {/* Desktop: width changes via grid template columns */}
+                                {/* Desktop: width changes via grid columns */}
                                 <motion.div
-                                    className="hidden md:grid gap-4 lg:gap-6 items-stretch"
+                                    className="hidden md:grid gap-4 items-stretch"
                                     style={{ gridTemplateColumns: gridCols }}
                                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     {resolvedMedia.map((m, i) => (
-                                        <Card
-                                            key={`desk-${active}-${i}`}
-                                            m={m}
-                                            big={i === playIndex}
-                                            play={i === playIndex}
-                                        />
+                                        <Card key={`desk-${active}-${i}`} m={m} big={i === playIndex} play={i === playIndex} />
                                     ))}
                                 </motion.div>
                             </div>
@@ -231,8 +214,7 @@ function Card({ m, big, play }: { m?: Media; big: boolean; play: boolean }) {
             className={[
                 "relative overflow-hidden border border-black/15 bg-white/10 rounded-none",
                 big ? "shadow-lg ring-1 ring-[#23352d]/30" : "",
-                // keep height constant so “width” feels like the change
-                "h-[22rem]",
+                "h-[20rem]",
             ].join(" ")}
         >
             {m?.type === "video" ? (
