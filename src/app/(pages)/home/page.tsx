@@ -43,8 +43,8 @@ export default function HomePage() {
       ],
       videos: {
         0: { src: "/1.webm", poster: "/img18.jpg" },
-        1: { src: "/2.webm", poster: "/img19.jpg" },
-        2: { src: "/3.webm", poster: "/img20.jpg" },
+        1: { src: "/3.webm", poster: "/img19.jpg" },
+        2: { src: "/2.webm", poster: "/img20.jpg" },
       },
     },
     {
@@ -58,8 +58,8 @@ export default function HomePage() {
       ],
       videos: {
         0: { src: "/1.webm", poster: "/img18.jpg" },
-        1: { src: "/2.webm", poster: "/img19.jpg" },
-        2: { src: "/3.webm", poster: "/img20.jpg" },
+        1: { src: "/3.webm", poster: "/img19.jpg" },
+        2: { src: "/2.webm", poster: "/img20.jpg" },
       },
     },
     {
@@ -73,8 +73,8 @@ export default function HomePage() {
       ],
       videos: {
         0: { src: "/1.webm", poster: "/img18.jpg" },
-        1: { src: "/2.webm", poster: "/img19.jpg" },
-        2: { src: "/3.webm", poster: "/img20.jpg" },
+        1: { src: "/3.webm", poster: "/img19.jpg" },
+        2: { src: "/2.webm", poster: "/img20.jpg" },
       },
     },
   ];

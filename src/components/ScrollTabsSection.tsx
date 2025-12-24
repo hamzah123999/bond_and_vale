@@ -164,7 +164,7 @@ export default function ScrollTabsSection({
                             </div>
                         </div>
 
-                        <div className="hidden lg:block absolute right-10 top-10">
+                        {/* <div className="hidden lg:block absolute right-10 top-10">
                             <div className="flex flex-col gap-3 text-xs uppercase tracking-widest text-[#23352d]/60">
                                 {tabs.map((t, idx) => (
                                     <div
@@ -178,7 +178,7 @@ export default function ScrollTabsSection({
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
