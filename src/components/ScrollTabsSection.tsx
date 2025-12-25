@@ -17,21 +17,21 @@ const tabs = [
         body:
             "OUR PAY-ON-SUCCESS MODEL REDEFINES VALUE IN COMMUNICATIONS. NO UPFRONT FEES, NO COMMITMENT AND NO RETAINERS. THIS TRANSPARENT, RESULTS-DRIVEN APPROACH REFLECTS OUR ACCOUNTABILITY, INTEGRITY, AND COMMITMENT TO MEASURABLE SUCCESS THAT STRENGTHENS EVERY PARTNERSHIP.",
         image: "/img18.jpg",
-        video: "/1.webm",
+        video: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627767/1_aazqv1.webm",
     },
     {
         title: "TRANSPARENCY & TRUST",
         body:
             "WE OPERATE WITH TRANSPARENCY. EVERY STRATEGY, MILESTONE AND METRIC IS SHARED OPENLY. THROUGH DATA-LED COMMUNICATION AND HONEST COLLABORATION, WE BUILD THE TRUST AND CREDIBILITY THAT DEFINE LASTING CLIENT RELATIONSHIPS.",
         image: "/img19.jpg",
-        video: "/3.webm",
+        video: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627812/3_ypaw6r.webm",
     },
     {
         title: "NETWORK AND INFLUENCE",
         body:
             "WITH A GLOBAL NETWORK OF MEDIA, INVESTORS AND INDUSTRY LEADERS, WE HELP BRANDS AMPLIFY AUTHORITY AND REDEFINE INFLUENCE. OUR RELATIONSHIPS AND STRATEGIC STORYTELLING TURN REPUTATION INTO MEASURABLE VISIBILITY AND INFLUENCE THAT ENDURES.",
         image: "/img20.jpg",
-        video: "/2.webm",
+        video: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627775/2_wmylkg.webm",
     },
 ];
 
