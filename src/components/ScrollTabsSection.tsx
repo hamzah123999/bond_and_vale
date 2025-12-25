@@ -7,6 +7,7 @@ import { Navigation, Pagination, Autoplay, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Image from "next/image";
 
 /* ================= STATIC DATA ================= */
 
@@ -131,7 +132,8 @@ function HoverVideo({
             className="relative h-[320px] lg:h-[420px] rounded-lg overflow-hidden border border-black/15 bg-white/10 group"
         >
             {/* IMAGE */}
-            <img
+            <Image
+                fill
                 src={image}
                 alt="media"
                 className="absolute inset-0 h-full w-full object-cover transition-opacity duration-300 group-hover:opacity-0"
