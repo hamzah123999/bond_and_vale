@@ -135,11 +135,11 @@ export default function Header() {
               } */}
             </Link>
             <Image
-              src="/logoicon2.png"
+              src="/logoicon3.png"
               alt="Logo TA Creatives &amp; Design"
               width={200}
               height={200}
-              className={`w-auto h-12 ${!changeColor ? "invert brightness-0" : ""} `}
+              className={`w-auto h-14 ${!changeColor ? "invert brightness-0" : ""} `}
             />
             {/* <Image
               src="/ylogoicon.svg"
