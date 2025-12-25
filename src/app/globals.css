@@ -154,3 +154,28 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+/* ===== SWIPER FIX FOR TAILWIND ===== */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #23352d;
+}
+
+.swiper-pagination-bullet {
+  background: #d9cab6;
+  opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active{
+  background: #ab8b64 !important;
+}

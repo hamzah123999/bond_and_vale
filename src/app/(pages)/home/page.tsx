@@ -15,7 +15,7 @@ import TestimonialsSlider from '@/components/TestimonialsSlider';
 import Wrapper from '@/app/Wrapper';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import ScrollTabsSection, { Tab } from '@/components/ScrollTabsSection';
+import ScrollTabsSection from '@/components/ScrollTabsSection';
 
 export default function HomePage() {
   const handleAnimationComplete = () => {
@@ -30,55 +30,6 @@ export default function HomePage() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const tabs: Tab[] = [
-    {
-      title: "PAY ON SUCCESS MODEL",
-      body:
-        "OUR PAY-ON-SUCCESS MODEL REDEFINES VALUE IN COMMUNICATIONS. NO UPFRONT FEES, NO COMMITMENT AND NO RETAINERS. THIS TRANSPARENT, RESULTS-DRIVEN APPROACH REFLECTS OUR ACCOUNTABILITY, INTEGRITY, AND COMMITMENT TO MEASURABLE SUCCESS THAT STRENGTHENS EVERY PARTNERSHIP.",
-      media: [
-        { type: "image", src: "/img18.jpg" },
-        { type: "image", src: "/img19.jpg" },
-        { type: "image", src: "/img20.jpg" },
-      ],
-      videos: {
-        0: { src: "/1.webm", poster: "/img18.jpg" },
-        1: { src: "/3.webm", poster: "/img19.jpg" },
-        2: { src: "/2.webm", poster: "/img20.jpg" },
-      },
-    },
-    {
-      title: "TRANSPARENCY & TRUST",
-      body:
-        "WE OPERATE WITH TRANSPARENCY. EVERY STRATEGY, MILESTONE AND METRIC IS SHARED OPENLY. THROUGH DATA-LED COMMUNICATION AND HONEST COLLABORATION, WE BUILD THE TRUST AND CREDIBILITY THAT DEFINE LASTING CLIENT RELATIONSHIPS AND MEANINGFUL BUSINESS OUTCOMES",
-      media: [
-        { type: "image", src: "/img18.jpg" },
-        { type: "image", src: "/img19.jpg" },
-        { type: "image", src: "/img20.jpg" },
-      ],
-      videos: {
-        0: { src: "/1.webm", poster: "/img18.jpg" },
-        1: { src: "/3.webm", poster: "/img19.jpg" },
-        2: { src: "/2.webm", poster: "/img20.jpg" },
-      },
-    },
-    {
-      title: "NETWORK AND INFLUENCE",
-      body:
-        "WITH A GLOBAL NETWORK OF MEDIA, INVESTORS AND INDUSTRY LEADERS, WE HELP BRANDS AMPLIFY AUTHORITY AND REDEFINE INFLUENCE. OUR RELATIONSHIPS AND STRATEGIC STORYTELLING TURN REPUTATION INTO MEASURABLE VISIBILITY AND INFLUENCE THAT ENDURES LONG AFTER THE HEADLINES FADE.",
-      media: [
-        { type: "image", src: "/img18.jpg" },
-        { type: "image", src: "/img19.jpg" },
-        { type: "image", src: "/img20.jpg" },
-      ],
-      videos: {
-        0: { src: "/1.webm", poster: "/img18.jpg" },
-        1: { src: "/3.webm", poster: "/img19.jpg" },
-        2: { src: "/2.webm", poster: "/img20.jpg" },
-      },
-    },
-  ];
-
 
   return (
     <Wrapper>
@@ -227,7 +178,7 @@ export default function HomePage() {
         </section>
 
         <div className=" ">
-          <ScrollTabsSection tabs={tabs} playIndexMode="byTab" />
+          <ScrollTabsSection />
         </div>
 
         <ProjectsFeatureSection

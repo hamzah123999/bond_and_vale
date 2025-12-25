@@ -37,7 +37,7 @@ const items = [
   { id: "image6", type: "image", img: "/company/img6.webp" },
   { id: "image7", type: "image", img: "/company/img7.webp" },
   { id: "image8", type: "image", img: "/company/img8.webp" },
-  { id: "image9", type: "image", img: "/company/img9.webp" },
+  { id: "image9", type: "image", img: "/company/img13.webp" },
   { id: "image10", type: "image", img: "/company/img10.webp" },
   { id: "image11", type: "image", img: "/company/img11.webp" },
   { id: "image12", type: "image", img: "/company/img12.webp" }
