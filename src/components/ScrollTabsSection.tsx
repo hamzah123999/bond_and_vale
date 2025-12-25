@@ -143,13 +143,16 @@ function HoverVideo({
             {/* VIDEO */}
             <video
                 ref={videoRef}
-                src={video}
                 muted
                 loop
                 playsInline
                 preload="metadata"
                 className="absolute inset-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            />
+            >
+                <source src={video} type="video/webm" />
+                Your browser does not support the video tag.
+            </video>
+
         </div>
     );
 }
