@@ -135,7 +135,7 @@ export default function Header() {
               } */}
             </Link>
             <Image
-              src="/logoicon.webp"
+              src="/logoicon2.png"
               alt="Logo TA Creatives &amp; Design"
               width={200}
               height={200}
