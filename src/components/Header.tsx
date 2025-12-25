@@ -117,7 +117,7 @@ export default function Header() {
                 alt="Logo TA Creatives &amp; Design"
                 width={200}
                 height={200}
-                className={`w-auto h-4 md:block hidden ${changeColor ? "invert" : ""} `}
+                className={`w-auto h-4 md:block hidden ${changeColor ? "invert" : " brightness-0 invert"} `}
               />
               {/* {
                 !changeColor ? (
