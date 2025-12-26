@@ -174,10 +174,10 @@ export default function ScrollSnapTabs() {
                                 <motion.div
                                     key={idx}
                                     style={{ opacity }}
-                                    className="absolute left-1/2 top-[35%] w-full max-w-7xl -translate-x-1/2 -translate-y-1/2 px-6 md:px-10 pointer-events-none"
+                                    className="absolute left-1/2 top-[32%] w-full max-w-7xl -translate-x-1/2 -translate-y-1/2 px-6 md:px-10 pointer-events-none"
                                 >
                                     <motion.div style={{ x }} className="will-change-transform">
-                                        <h2 className="font-[PPPangaia] uppercase text-[#122620] md:text-5xl text-3xl xl:text-7xl lg:text-7xl tracking-wide">
+                                        <h2 className="font-[PPPangaia] uppercase text-[#122620] md:text-6xl text-3xl tracking-wide">
                                             {item.title}
                                         </h2>
                                         <p className="md:mt-6 mt-3 max-w-5xl text-[#50594f] text-sm md:text-base md:leading-relaxed tracking-[0.08em] uppercase">
