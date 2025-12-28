@@ -18,6 +18,12 @@ type BlogDoc = {
     createdAt: string;
 };
 
+export const metadata = {
+    title: "Insights & Articles",
+    description:
+        "Read expert insights on PR, communications, branding, and digital marketing from Bond & Vale.",
+};
+
 export default function Blog() {
     const [blogs, setBlogs] = useState<BlogDoc[]>([]);
     const [loading, setLoading] = useState(true);
