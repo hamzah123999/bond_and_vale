@@ -44,21 +44,21 @@ export default function AdminLoginPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // ✅ Check if already logged in
-    // useEffect(() => {
-    //     const checkSession = async () => {
-    //         try {
-    //             const res = await authClient.getSession();
-    //             const loggedIn = !!(res?.data?.session || res?.data?.user);
-    //             setIsAuthenticated(loggedIn);
-    //         } catch {
-    //             setIsAuthenticated(false);
-    //         } finally {
-    //             setCheckingSession(false);
-    //         }
-    //     };
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const res = await authClient.getSession();
+                const loggedIn = !!(res?.data?.session || res?.data?.user);
+                setIsAuthenticated(loggedIn);
+            } catch {
+                setIsAuthenticated(false);
+            } finally {
+                setCheckingSession(false);
+            }
+        };
 
-    //     checkSession();
-    // }, []);
+        checkSession();
+    }, []);
 
 
 
@@ -66,7 +66,6 @@ export default function AdminLoginPage() {
         e.preventDefault();
         if (loading) return;
 
-        const callbackURL = `${window.location.origin}/dashboard`;
         setLoading(true);
         try {
 
@@ -92,15 +91,15 @@ export default function AdminLoginPage() {
     };
 
     // ✅ Prevent UI flash while checking session
-    // if (checkingSession) {
-    //     return (
-    //         <Wrapper>
-    //             <main className="min-h-screen fixed top-0 left-0 bg-[#e0d1be] flex items-center justify-center">
-    //                 <p className="text-sm text-[#0e221c]/70">Checking session…</p>
-    //             </main>
-    //         </Wrapper>
-    //     );
-    // }
+    if (checkingSession) {
+        return (
+            <Wrapper>
+                <main className="min-h-screen fixed top-0 left-0 bg-[#e0d1be] flex items-center justify-center">
+                    <p className="text-sm text-[#0e221c]/70">Checking session…</p>
+                </main>
+            </Wrapper>
+        );
+    }
 
 
 
@@ -134,7 +133,7 @@ export default function AdminLoginPage() {
                             <div className="p-6 sm:p-8">
 
                                 {/* ✅ IF ALREADY LOGGED IN */}
-                                {/* {isAuthenticated ? (
+                                {isAuthenticated ? (
                                     <>
                                         <div className="text-xs uppercase tracking-[0.22em] text-[#0e221c]/60">
                                             Already signed in
@@ -166,70 +165,70 @@ export default function AdminLoginPage() {
                                             </Link>
                                         </div>
                                     </>
-                                ) : ( */}
-                                <>
-                                    <div className="text-xs uppercase tracking-[0.22em] text-[#0e221c]/60">
-                                        Login
-                                    </div>
-
-                                    <h2 className="mt-3 font-serif text-2xl leading-tight">
-                                        Admin Credentials
-                                    </h2>
-
-                                    <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-                                        {/* Email */}
-                                        <div>
-                                            <label className="block text-[10px] uppercase tracking-[0.22em] text-[#0e221c]/60">
-                                                Email
-                                            </label>
-                                            <div className="mt-2 flex items-center gap-3 border border-black/10 bg-white/20 px-4 py-3">
-                                                <Mail className="h-4 w-4 text-[#0e221c]/60" />
-                                                <input
-                                                    type="email"
-                                                    required
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    className="w-full bg-transparent outline-none"
-                                                    placeholder="Enter your email address"
-                                                />
-                                            </div>
+                                ) : (
+                                    <>
+                                        <div className="text-xs uppercase tracking-[0.22em] text-[#0e221c]/60">
+                                            Login
                                         </div>
 
-                                        {/* Password */}
-                                        <div>
-                                            <label className="block text-[10px] uppercase tracking-[0.22em] text-[#0e221c]/60">
-                                                Password
-                                            </label>
-                                            <div className="mt-2 flex items-center gap-3 border border-black/10 bg-white/20 px-4 py-3">
-                                                <Lock className="h-4 w-4 text-[#0e221c]/60" />
-                                                <input
-                                                    type={showPass ? "text" : "password"}
-                                                    required
-                                                    value={password}
-                                                    onChange={(e) => setPassword(e.target.value)}
-                                                    placeholder="Enter your password"
-                                                    className="w-full bg-transparent outline-none"
-                                                />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setShowPass(!showPass)}
-                                                >
-                                                    {showPass ? <EyeOff /> : <Eye />}
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <h2 className="mt-3 font-serif text-2xl leading-tight">
+                                            Admin Credentials
+                                        </h2>
 
-                                        <button
-                                            type="submit"
-                                            disabled={loading}
-                                            className="mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#3f4b3f] px-6 py-3 text-sm text-[#e0d1be]"
-                                        >
-                                            {loading ? "Signing in..." : "Sign In"}
-                                            <ArrowRight className="h-4 w-4" />
-                                        </button>
-                                    </form>
-                                </>
-                                {/* )} */}
+                                        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                                            {/* Email */}
+                                            <div>
+                                                <label className="block text-[10px] uppercase tracking-[0.22em] text-[#0e221c]/60">
+                                                    Email
+                                                </label>
+                                                <div className="mt-2 flex items-center gap-3 border border-black/10 bg-white/20 px-4 py-3">
+                                                    <Mail className="h-4 w-4 text-[#0e221c]/60" />
+                                                    <input
+                                                        type="email"
+                                                        required
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
+                                                        className="w-full bg-transparent outline-none"
+                                                        placeholder="Enter your email address"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* Password */}
+                                            <div>
+                                                <label className="block text-[10px] uppercase tracking-[0.22em] text-[#0e221c]/60">
+                                                    Password
+                                                </label>
+                                                <div className="mt-2 flex items-center gap-3 border border-black/10 bg-white/20 px-4 py-3">
+                                                    <Lock className="h-4 w-4 text-[#0e221c]/60" />
+                                                    <input
+                                                        type={showPass ? "text" : "password"}
+                                                        required
+                                                        value={password}
+                                                        onChange={(e) => setPassword(e.target.value)}
+                                                        placeholder="Enter your password"
+                                                        className="w-full bg-transparent outline-none"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setShowPass(!showPass)}
+                                                    >
+                                                        {showPass ? <EyeOff /> : <Eye />}
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                type="submit"
+                                                disabled={loading}
+                                                className="mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#3f4b3f] px-6 py-3 text-sm text-[#e0d1be]"
+                                            >
+                                                {loading ? "Signing in..." : "Sign In"}
+                                                <ArrowRight className="h-4 w-4" />
+                                            </button>
+                                        </form>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
