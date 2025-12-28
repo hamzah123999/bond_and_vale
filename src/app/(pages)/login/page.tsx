@@ -61,11 +61,11 @@ export default function AdminLoginPage() {
     // }, []);
 
 
-    
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (loading) return;
-        
+
         const callbackURL = `${window.location.origin}/dashboard`;
         setLoading(true);
         try {
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
                 email,
                 password,
                 rememberMe,
-                callbackURL,
+                callbackURL: "/dashboard",
             });
 
             if (error) {
