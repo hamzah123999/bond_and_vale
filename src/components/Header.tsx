@@ -115,7 +115,7 @@ export default function Header() {
   return (
     <>
       <header className="navbar relative z-[999] w-full">
-        <div className={`w-full ${changeColor ? "bg-[#e0d1be]" : ""} transition-all duration-500 fixed top-0 left-0`}>
+        <div className={`w-full ${changeColor ? "bg-[#e0d1be]/70 backdrop-blur-lg" : ""} transition-all duration-500 fixed top-0 left-0`}>
           <div className="mx-auto flex h-24 w-full max-w-[1400px] items-center justify-between px-6">
             {/* <div className="copyright-text lg:flex hidden items-center">
               <div className={`${!changeColor ? "text-white" : "text-black/90"}`}>
