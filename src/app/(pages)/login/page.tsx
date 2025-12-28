@@ -14,8 +14,8 @@ export default function AdminLoginPage() {
     // const signup = async () => {
     //     const { data, error } = await authClient.signUp.email({
     //         name: "Bond And Vale",
-    //         email: "",
-    //         password: "",
+    //         email: "admin@gmail.com",
+    //         password: "12345678",
     //     });
 
     //     if (error) {
@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
     if (checkingSession) {
         return (
             <Wrapper>
-                <main className="min-h-screen bg-[#e6d7c4] flex items-center justify-center">
+                <main className="min-h-screen fixed top-0 left-0 bg-[#e0d1be] flex items-center justify-center">
                     <p className="text-sm text-[#0e221c]/70">Checking session…</p>
                 </main>
             </Wrapper>
@@ -105,7 +105,7 @@ export default function AdminLoginPage() {
     return (
         <Wrapper>
             <TabLoader direction="top" speed={1.4} minDuration={2000} />
-            <main className="min-h-screen bg-[#e6d7c4] text-[#0e221c]">
+            <main className="min-h-screen bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 
                 <section className="mx-auto max-w-[1450px] px-4 lg:px-14 pt-14 lg:pt-20 pb-20">
@@ -149,7 +149,7 @@ export default function AdminLoginPage() {
                                         <div className="mt-8 flex flex-col gap-3">
                                             <button
                                                 onClick={() => router.push("/dashboard")}
-                                                className="inline-flex items-center justify-center gap-3 rounded-full bg-[#3f4b3f] px-6 py-3 text-sm text-[#e6d7c4] hover:opacity-90"
+                                                className="inline-flex items-center justify-center gap-3 rounded-full bg-[#3f4b3f] px-6 py-3 text-sm text-[#e0d1be] hover:opacity-90"
                                             >
                                                 Go to Dashboard
                                                 <ArrowRight className="h-4 w-4" />
@@ -220,7 +220,7 @@ export default function AdminLoginPage() {
                                             <button
                                                 type="submit"
                                                 disabled={loading}
-                                                className="mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#3f4b3f] px-6 py-3 text-sm text-[#e6d7c4]"
+                                                className="mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#3f4b3f] px-6 py-3 text-sm text-[#e0d1be]"
                                             >
                                                 {loading ? "Signing in..." : "Sign In"}
                                                 <ArrowRight className="h-4 w-4" />

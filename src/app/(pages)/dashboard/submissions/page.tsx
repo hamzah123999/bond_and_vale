@@ -122,7 +122,7 @@ export default function SubmissionsPage() {
 
 
     return (
-        <main className="min-h-screen bg-[#e6d7c4] text-[#23352d]">
+        <main className="min-h-screen bg-[#e0d1be] text-[#23352d]">
             <Header />
 
             <section className="mx-auto max-w-[1450px] px-4 lg:px-14 pt-14 lg:pt-20 pb-24">
@@ -253,7 +253,7 @@ export default function SubmissionsPage() {
             {/* Modal */}
             {active && (
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40">
-                    <div className="w-full max-w-xl border border-black/10 bg-[#e6d7c4] p-6">
+                    <div className="w-full max-w-xl border border-black/10 bg-[#e0d1be] p-6">
                         <div className="flex items-start justify-between gap-6">
                             <div>
                                 <div className="text-xs uppercase tracking-[0.22em] text-[#23352d]/60">

@@ -136,7 +136,7 @@ export default function AdminDashboard() {
     };
 
     return (
-        <main className="min-h-screen bg-[#e6d7c4] text-[#23352d]">
+        <main className="min-h-screen bg-[#e0d1be] text-[#23352d]">
             <TabLoader direction="top" speed={1.4} minDuration={2000} />
             <Header />
 
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
                     <div className="flex flex-wrap gap-3">
                         <Link
                             href="/dashboard/create-post"
-                            className="inline-flex items-center gap-2 rounded-full border border-black/15 bg-[#3f4b3f] px-5 py-3 text-sm text-[#e6d7c4] hover:opacity-90 transition"
+                            className="inline-flex items-center gap-2 rounded-full border border-black/15 bg-[#3f4b3f] px-5 py-3 text-sm text-[#e0d1be] hover:opacity-90 transition"
                         >
                             <Plus className="h-4 w-4" />
                             Create Post

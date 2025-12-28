@@ -9,7 +9,7 @@ export default function Services() {
         <Wrapper>
             <TabLoader direction="top" speed={1.4} minDuration={2000} />
             {/* <TabLoader direction="top" speed={1.4} /> */}
-            <div className="bg-[#e6d7c4] min-h-screen">
+            <div className="bg-[#e0d1be] min-h-screen">
                 <Header />
                 <ServicesSection
                 headingTop='Our Services'

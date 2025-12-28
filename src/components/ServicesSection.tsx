@@ -30,7 +30,7 @@ export default function ServicesSection({
         console.log('All letters have animated!');
     };
     return (
-        <section className="bg-[#e6d7c4] text-[#23352d]">
+        <section className="bg-[#e0d1be] text-[#23352d]">
             <div className="mx-auto max-w-[1450px] px-4 lg:px-14 py-14 lg:py-20">
                 {/* Heading */}
                 <div className="flex flex-col ">

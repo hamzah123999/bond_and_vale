@@ -36,7 +36,7 @@ export default function DashboardLayout({
 
     if (checking) {
         return (
-            <div className="min-h-screen bg-[#e6d7c4] text-[#23352d] flex items-center justify-center">
+            <div className="min-h-screen bg-[#e0d1be] text-[#23352d] flex items-center justify-center">
                 <div className="text-sm text-[#23352d]/70">Checking session…</div>
             </div>
         );

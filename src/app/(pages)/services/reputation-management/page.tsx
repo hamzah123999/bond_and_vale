@@ -83,7 +83,7 @@ export default function ServiceDetailPage({
     return (
         <Wrapper>
             <TabLoader direction="top" speed={1.4} minDuration={2000} />
-            <main className="bg-[#e6d7c4] text-[#23352d]">
+            <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
 
                 {/* Top spacing */}
@@ -141,7 +141,7 @@ export default function ServiceDetailPage({
                             <div className="mt-6 flex items-center gap-3">
                                 <Link
                                     href="/contact"
-                                    className="inline-flex items-center gap-3 rounded-full border border-black/15 bg-[#3f4b3f] px-5 py-3 text-sm text-[#e6d7c4] hover:opacity-90 transition"
+                                    className="inline-flex items-center gap-3 rounded-full border border-black/15 bg-[#3f4b3f] px-5 py-3 text-sm text-[#e0d1be] hover:opacity-90 transition"
                                 >
                                     Start a Project <ArrowRight className="h-4 w-4" />
                                 </Link>

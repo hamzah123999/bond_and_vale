@@ -61,7 +61,7 @@ export default function Blog() {
     return (
         <Wrapper>
             <TabLoader direction="top" speed={1.4} minDuration={2000} />
-            <section className="bg-[#eadcc9] text-[#0e221c]">
+            <section className="bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 
                 <div className="mx-auto max-w-[1400px] px-4 md:px-10 py-14 md:py-20">

@@ -157,7 +157,7 @@ export default function ScrollSnapTabs() {
 
     const activeIndex = makeActiveIndex();
 
-    const sectionHeightVh = items.length * 100;
+    const sectionHeightVh = items.length * 250;
 
     return (
         <section ref={sectionRef} className="relative w-full" style={{ height: `${sectionHeightVh}vh` }}>

@@ -93,12 +93,29 @@ export default function Header() {
   ];
 
   const path = usePathname();
-  const changeColor = path === "/" ? false : true;
+  const [changeColor, setChangeColor] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (path !== "/" || window.scrollY > 100) {
+        setChangeColor(true);
+      } else {
+        setChangeColor(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [path]);
+
+
+
 
   return (
     <>
       <header className="navbar relative z-[999] w-full">
-        <div className="w-full">
+        <div className={`w-full ${changeColor ? "bg-[#e0d1be]" : ""} transition-all duration-500 fixed top-0 left-0`}>
           <div className="mx-auto flex h-24 w-full max-w-[1400px] items-center justify-between px-6">
             {/* <div className="copyright-text lg:flex hidden items-center">
               <div className={`${!changeColor ? "text-white" : "text-black/90"}`}>
@@ -327,6 +344,8 @@ export default function Header() {
           </div>
         </div>
       </header>
+
+      <div className="h-24"></div>
 
       {/* FULLSCREEN MENU OVERLAY */}
       <div

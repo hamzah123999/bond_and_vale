@@ -77,7 +77,7 @@ export default function BlogPostPage({
 
     return (
         <Wrapper>
-            <main className="bg-[#e6d7c4] text-[#0e221c]">
+            <main className="bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 
                 {loading && (

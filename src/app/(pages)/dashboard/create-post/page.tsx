@@ -105,7 +105,7 @@ export default function CreatePostPage() {
     };
 
     return (
-        <main className="min-h-screen bg-[#e6d7c4] text-[#23352d]">
+        <main className="min-h-screen bg-[#e0d1be] text-[#23352d]">
             <Header />
 
             <section className="mx-auto max-w-[1450px] px-4 lg:px-14 pt-14 lg:pt-20 pb-24">
@@ -262,7 +262,7 @@ export default function CreatePostPage() {
                                         setStatus("published");
                                         createPost("published");
                                     }}
-                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-[#3f4b3f] px-4 py-3 text-sm text-[#e6d7c4] hover:opacity-90 disabled:opacity-60"
+                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-[#3f4b3f] px-4 py-3 text-sm text-[#e0d1be] hover:opacity-90 disabled:opacity-60"
                                 >
                                     <ArrowRight className="h-4 w-4" />
                                     {saving && status === "published" ? "Publishing..." : "Publish"}
