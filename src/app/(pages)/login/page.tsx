@@ -43,21 +43,21 @@ export default function AdminLoginPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // ✅ Check if already logged in
-    useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const res = await authClient.getSession();
-                const loggedIn = !!(res?.data?.session || res?.data?.user);
-                setIsAuthenticated(loggedIn);
-            } catch {
-                setIsAuthenticated(false);
-            } finally {
-                setCheckingSession(false);
-            }
-        };
+    // useEffect(() => {
+    //     const checkSession = async () => {
+    //         try {
+    //             const res = await authClient.getSession();
+    //             const loggedIn = !!(res?.data?.session || res?.data?.user);
+    //             setIsAuthenticated(loggedIn);
+    //         } catch {
+    //             setIsAuthenticated(false);
+    //         } finally {
+    //             setCheckingSession(false);
+    //         }
+    //     };
 
-        checkSession();
-    }, []);
+    //     checkSession();
+    // }, []);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -89,15 +89,15 @@ export default function AdminLoginPage() {
     };
 
     // ✅ Prevent UI flash while checking session
-    if (checkingSession) {
-        return (
-            <Wrapper>
-                <main className="min-h-screen fixed top-0 left-0 bg-[#e0d1be] flex items-center justify-center">
-                    <p className="text-sm text-[#0e221c]/70">Checking session…</p>
-                </main>
-            </Wrapper>
-        );
-    }
+    // if (checkingSession) {
+    //     return (
+    //         <Wrapper>
+    //             <main className="min-h-screen fixed top-0 left-0 bg-[#e0d1be] flex items-center justify-center">
+    //                 <p className="text-sm text-[#0e221c]/70">Checking session…</p>
+    //             </main>
+    //         </Wrapper>
+    //     );
+    // }
 
 
 
@@ -131,7 +131,7 @@ export default function AdminLoginPage() {
                             <div className="p-6 sm:p-8">
 
                                 {/* ✅ IF ALREADY LOGGED IN */}
-                                {isAuthenticated ? (
+                                {/* {isAuthenticated ? (
                                     <>
                                         <div className="text-xs uppercase tracking-[0.22em] text-[#0e221c]/60">
                                             Already signed in
@@ -163,8 +163,7 @@ export default function AdminLoginPage() {
                                             </Link>
                                         </div>
                                     </>
-                                ) : (
-                                    /* ✅ NORMAL LOGIN FORM */
+                                ) : ( */}
                                     <>
                                         <div className="text-xs uppercase tracking-[0.22em] text-[#0e221c]/60">
                                             Login
@@ -227,7 +226,7 @@ export default function AdminLoginPage() {
                                             </button>
                                         </form>
                                     </>
-                                )}
+                                {/* )} */}
                             </div>
                         </div>
                     </div>
