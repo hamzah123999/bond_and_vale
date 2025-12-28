@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
@@ -61,14 +61,12 @@ export default function AdminLoginPage() {
     // }, []);
 
 
-    const callbackURL = `${window.location.origin}/dashboard`;
-
-    console.log(callbackURL);
-
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (loading) return;
-
+        
+        const callbackURL = `${window.location.origin}/dashboard`;
         setLoading(true);
         try {
 
