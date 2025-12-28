@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import TabLoader from "@/components/Loader";
+import { toast } from "sonner";
 
 export default function AdminLoginPage() {
 
@@ -75,14 +76,14 @@ export default function AdminLoginPage() {
             });
 
             if (error) {
-                alert(error.message || "Invalid email or password.");
+                toast.error(error.message || "Invalid email or password.");
                 setLoading(false);
                 return;
             }
 
             router.replace("/dashboard");
         } catch (err: any) {
-            alert(err?.message || "Something went wrong. Please try again.");
+            toast.error(err?.message || "Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }
