@@ -31,7 +31,7 @@ export default function ScrollSnapTabs() {
     const media = useMemo<MediaItem[]>(
         () => [
             { image: { src: "/img19.jpg", alt: "Image 1" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627767/1_aazqv1.webm" } },
-            { image: { src: "/img18.jpg", alt: "Image 2" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627812/3_ypaw6r.webm" } },
+            { image: { src: "/img18.jpg", alt: "Image 18" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627812/3_ypaw6r.webm" } },
             { image: { src: "/img20.jpg", alt: "Image 3" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627775/2_wmylkg.webm" } },
         ],
         []
