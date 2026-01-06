@@ -13,7 +13,7 @@ export default function ScrollSnapTabs() {
     const items = useMemo<Item[]>(
         () => [
             {
-                title: "PAY ON SUCCESS MODEL",
+                title: "PAY ON SUCCESS",
                 body: "OUR PAY-ON-SUCCESS MODEL REDEFINES VALUE IN COMMUNICATIONS. NO UPFRONT FEES, NO COMMITMENT AND NO RETAINERS. THIS TRANSPARENT, RESULTS-DRIVEN APPROACH REFLECTS OUR ACCOUNTABILITY, INTEGRITY, AND COMMITMENT TO MEASURABLE SUCCESS THAT STRENGTHENS EVERY PARTNERSHIP.",
             },
             {
