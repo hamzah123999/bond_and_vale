@@ -30,9 +30,24 @@ export default function ScrollSnapTabs() {
 
     const media = useMemo<MediaItem[]>(
         () => [
-            { image: { src: "/img19.jpg", alt: "Image 1" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627767/1_aazqv1.webm" } },
-            { image: { src: "/img18.jpg", alt: "Image 18" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627812/3_ypaw6r.webm" } },
-            { image: { src: "/img20.jpg", alt: "Image 3" }, video: { src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627775/2_wmylkg.webm" } },
+            {
+                image: { src: "/img19.jpg", alt: "Image 1" },
+                video: {
+                    src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627767/1_aazqv1.webm",
+                },
+            },
+            {
+                image: { src: "/img18.jpg", alt: "Image 18" },
+                video: {
+                    src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627812/3_ypaw6r.webm",
+                },
+            },
+            {
+                image: { src: "/img20.jpg", alt: "Image 3" },
+                video: {
+                    src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627775/2_wmylkg.webm",
+                },
+            },
         ],
         []
     );
@@ -65,7 +80,13 @@ export default function ScrollSnapTabs() {
     const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
+    // When switching from current -> next
     const SWITCH = 0.5;
+
+    // "Pause" while the CURRENT text is fully visible (scroll still happens, but x stays at 0).
+    // This is scroll-distance based (feels like ~a short "1s" hold during typical scroll).
+    // Increase for longer hold. Must be < SWITCH.
+    const HOLD = 0.18;
 
     const makeX = (i: number) =>
         useTransform(scrollYProgress, (p) => {
@@ -77,11 +98,16 @@ export default function ScrollSnapTabs() {
             const current = t;
             const next = t + 1;
 
+            // CURRENT: stay for HOLD, then slide out until SWITCH
             if (i === current) {
-                const tt = clamp01(local / SWITCH);
+                if (local <= HOLD) return 0;
+
+                const denom = Math.max(1e-6, SWITCH - HOLD);
+                const tt = clamp01((local - HOLD) / denom);
                 return lerp(0, -w, tt);
             }
 
+            // NEXT: stays offscreen until SWITCH, then slides in until end
             if (i === next) {
                 if (local < SWITCH) return -w;
                 const tt = clamp01((local - SWITCH) / (1 - SWITCH));
@@ -103,10 +129,15 @@ export default function ScrollSnapTabs() {
             const fadeZone = 0.18;
 
             if (i === current) {
-                const startFade = Math.max(0, SWITCH - fadeZone);
+                // Always fully visible during HOLD
+                if (local <= HOLD) return 1;
+
+                // Fade-out happens near SWITCH (same as before), but current is still "present" after HOLD
+                const startFade = Math.max(HOLD, SWITCH - fadeZone);
                 if (local <= startFade) return 1;
                 if (local >= SWITCH) return 0;
-                const tt = (local - startFade) / (SWITCH - startFade);
+
+                const tt = (local - startFade) / Math.max(1e-6, SWITCH - startFade);
                 return lerp(1, 0, clamp01(tt));
             }
 
@@ -114,7 +145,8 @@ export default function ScrollSnapTabs() {
                 const endFade = Math.min(1, SWITCH + fadeZone);
                 if (local <= SWITCH) return 0;
                 if (local >= endFade) return 1;
-                const tt = (local - SWITCH) / (endFade - SWITCH);
+
+                const tt = (local - SWITCH) / Math.max(1e-6, endFade - SWITCH);
                 return lerp(0, 1, clamp01(tt));
             }
 
@@ -157,13 +189,20 @@ export default function ScrollSnapTabs() {
 
     const activeIndex = makeActiveIndex();
 
-    const sectionHeightVh = items.length * 250;
+    const sectionHeightVh = items.length * 300;
 
     return (
-        <section ref={sectionRef} className="relative w-full" style={{ height: `${sectionHeightVh}vh` }}>
+        <section
+            ref={sectionRef}
+            className="relative w-full"
+            style={{ height: `${sectionHeightVh}vh` }}
+        >
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 <div className="relative h-full w-full flex items-center max-w-7xl mx-auto overflow-x-hidden justify-center">
-                    <div ref={clipRef} className="w-full max-w-7xl px-6 md:px-10 overflow-hidden">
+                    <div
+                        ref={clipRef}
+                        className="w-full max-w-7xl px-6 md:px-10 overflow-hidden"
+                    >
                         <div className="relative h-[1px] w-full" />
 
                         {items.map((item, idx) => {
@@ -208,7 +247,9 @@ export default function ScrollSnapTabs() {
                                                     autoPlay
                                                     className="absolute inset-0 h-full w-full object-cover"
                                                     style={{
-                                                        opacity: useTransform(activeIndex, (a) => (a === idx ? 1 : 0)),
+                                                        opacity: useTransform(activeIndex, (a) =>
+                                                            a === idx ? 1 : 0
+                                                        ),
                                                     }}
                                                 />
                                                 <motion.img
@@ -217,7 +258,9 @@ export default function ScrollSnapTabs() {
                                                     draggable={false}
                                                     className="absolute inset-0 h-full w-full object-cover"
                                                     style={{
-                                                        opacity: useTransform(activeIndex, (a) => (a === idx ? 0 : 1)),
+                                                        opacity: useTransform(activeIndex, (a) =>
+                                                            a === idx ? 0 : 1
+                                                        ),
                                                     }}
                                                 />
                                             </div>
