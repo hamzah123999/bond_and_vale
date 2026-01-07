@@ -18,7 +18,7 @@ export default function Services() {
                         {
                             title: "Public Relations",
                             imageSrc: "/services/PublicRelations.png",
-                            videoSrc: "/services/PublicRelations.mp4",
+                            videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779872/PublicRelations_iyh2vz.mp4",
                             tag: "Service",
                             description: "Media outreach & brand positioning.",
                             href:"/public-relations"
@@ -26,7 +26,7 @@ export default function Services() {
                         {
                             title: "Brand Consultancy",
                             imageSrc: "/services/BrandConsultancy.png",
-                            videoSrc: "/services/BrandConsultancy.mp4",
+                            videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779882/BrandConsultancy_fklcds.mp4",
                             tag: "Service",
                             description: "Identity, strategy & messaging.",
                             href:"/brand-consultancy"
@@ -34,7 +34,7 @@ export default function Services() {
                         {
                             title: "Reputation Management",
                             imageSrc: "/services/ReputationManagement.png",
-                            videoSrc: "/services/ReputationManagement.mp4",
+                            videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779877/ReputationManagement_pyi6ng.mp4",
                             tag: "Service",
                             description: "Protect and strengthen trust.",
                             href:"/reputation-management"
@@ -42,7 +42,7 @@ export default function Services() {
                         {
                             title: "Website Development",
                             imageSrc: "/services/WebsiteDevelopment.png",
-                            videoSrc: "/services/WebsiteDevelopment.mp4",
+                            videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779875/WebsiteDevelopment_pylnuy.mp4",
                             tag: "Service",
                             description: "Modern, fast conversion websites.",
                             href:"/website-development"
@@ -50,7 +50,7 @@ export default function Services() {
                         {
                             title: "Digital Marketing",
                             imageSrc: "/services/DigitalMarketing.png",
-                            videoSrc: "/services/DigitalMarketing.mp4",
+                            videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779874/DigitalMarketing_pzqiwq.mp4",
                             tag: "Service",
                             description: "Performance + creative campaigns.",
                             href:"/digital-marketing"
@@ -58,7 +58,7 @@ export default function Services() {
                         {
                             title: "Investor Relations",
                             imageSrc: "/services/InvestorRelations.png",
-                            videoSrc: "/services/InvestorRelations.mp4",
+                            videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779870/InvestorRelations_trvvqh.mp4",
                             tag: "Service",
                             description: "Clear communication for investors.",
                             href:"/investor-relations"

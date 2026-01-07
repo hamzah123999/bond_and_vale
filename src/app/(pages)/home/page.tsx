@@ -57,7 +57,7 @@ export default function HomePage() {
             playsInline
             preload="auto"
           >
-            <source src="/mobile.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1767782166/mobile_ttipba.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <div className="absolute inset-0 bg-black/50" />
@@ -203,7 +203,7 @@ We are Bond and Vale. Redefining Influence."
             {
               title: "Public Relations",
               imageSrc: "/services/PublicRelations.png",
-              videoSrc: "/services/PublicRelations.mp4",
+              videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779872/PublicRelations_iyh2vz.mp4",
               tag: "Service",
               description: "Media outreach & brand positioning.",
               href: "/public-relations"
@@ -211,7 +211,7 @@ We are Bond and Vale. Redefining Influence."
             {
               title: "Brand Consultancy",
               imageSrc: "/services/BrandConsultancy.png",
-              videoSrc: "/services/BrandConsultancy.mp4",
+              videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779882/BrandConsultancy_fklcds.mp4",
               tag: "Service",
               description: "Identity, strategy & messaging.",
               href: "/brand-consultancy"
@@ -219,7 +219,7 @@ We are Bond and Vale. Redefining Influence."
             {
               title: "Reputation Management",
               imageSrc: "/services/ReputationManagement.png",
-              videoSrc: "/services/ReputationManagement.mp4",
+              videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779877/ReputationManagement_pyi6ng.mp4",
               tag: "Service",
               description: "Protect and strengthen trust.",
               href: "/reputation-management"
@@ -227,7 +227,7 @@ We are Bond and Vale. Redefining Influence."
             {
               title: "Website Development",
               imageSrc: "/services/WebsiteDevelopment.png",
-              videoSrc: "/services/WebsiteDevelopment.mp4",
+              videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779875/WebsiteDevelopment_pylnuy.mp4",
               tag: "Service",
               description: "Modern, fast conversion websites.",
               href: "/website-development"
@@ -235,7 +235,7 @@ We are Bond and Vale. Redefining Influence."
             {
               title: "Digital Marketing",
               imageSrc: "/services/DigitalMarketing.png",
-              videoSrc: "/services/DigitalMarketing.mp4",
+              videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779874/DigitalMarketing_pzqiwq.mp4",
               tag: "Service",
               description: "Performance + creative campaigns.",
               href: "/digital-marketing"
@@ -243,7 +243,7 @@ We are Bond and Vale. Redefining Influence."
             {
               title: "Investor Relations",
               imageSrc: "/services/InvestorRelations.png",
-              videoSrc: "/services/InvestorRelations.mp4",
+              videoSrc: "https://res.cloudinary.com/dixhnqcby/video/upload/v1767779870/InvestorRelations_trvvqh.mp4",
               tag: "Service",
               description: "Clear communication for investors.",
               href: "/investor-relations"

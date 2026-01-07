@@ -42,7 +42,7 @@ export default function ServiceDetailPage({
         image2:
             "img12.png",
         video:
-            "/video2.mp4",
+            "https://res.cloudinary.com/dixhnqcby/video/upload/v1767780348/Video2_gzjxhe.mp4",
         videoPoster:
             "img12.png",
     },

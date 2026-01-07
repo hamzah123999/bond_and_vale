@@ -41,7 +41,7 @@ export default function ServiceDetailPage({
         image1: "img13.png",
         image2: "img5.jpg",
         video:
-            "/video3.mp4",
+            "https://res.cloudinary.com/dixhnqcby/video/upload/v1767780289/Video3_cxr2ou.mp4",
         videoPoster: "img5.jpg",
     },
 }: Props) {
