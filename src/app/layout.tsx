@@ -59,13 +59,6 @@ export const metadata: Metadata = {
     title: "Bond & Vale | Strategic PR & Communications Consultancy",
     description:
       "Integrated communications consultancy delivering PR, brand strategy, and digital marketing for long-term growth.",
-    images: ["/og-image.jpg"],
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
 
   robots: {
