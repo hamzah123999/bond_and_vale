@@ -15,7 +15,13 @@ import TestimonialsSlider from '@/components/TestimonialsSlider';
 import Wrapper from '@/app/Wrapper';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import ScrollTabsSection from '@/components/ScrollTabsSection';
+// import ScrollTabsSection from '@/components/ScrollTabsSection';
+import dynamic from 'next/dynamic';
+
+const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
+  ssr: false,
+  loading: () => <div className="h-[60vh]" />,
+});
 
 export default function HomePage() {
   const handleAnimationComplete = () => {

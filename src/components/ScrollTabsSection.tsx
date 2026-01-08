@@ -13,7 +13,7 @@ export default function ScrollSnapTabs() {
     const items = useMemo<Item[]>(
         () => [
             {
-                title: "PAY ON SUCCESS",
+                title: "PAY ON SUCCESS MODEL",
                 body: "OUR PAY-ON-SUCCESS MODEL REDEFINES VALUE IN COMMUNICATIONS. NO UPFRONT FEES, NO COMMITMENT AND NO RETAINERS. THIS TRANSPARENT, RESULTS-DRIVEN APPROACH REFLECTS OUR ACCOUNTABILITY, INTEGRITY, AND COMMITMENT TO MEASURABLE SUCCESS THAT STRENGTHENS EVERY PARTNERSHIP.",
             },
             {
@@ -189,7 +189,7 @@ export default function ScrollSnapTabs() {
 
     const activeIndex = makeActiveIndex();
 
-    const sectionHeightVh = items.length * 300;
+    const sectionHeightVh = items.length * 250;
 
     return (
         <section

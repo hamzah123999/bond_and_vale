@@ -21,14 +21,14 @@ export default function Wrapper({ children, className = "" }: Props) {
     useEffect(() => {
         AOS.init({ once: true, duration: 800, delay: 100 });
 
+        if (window.innerWidth < 768) return; // disable on mobile
+
         const lenis = new Lenis({ autoRaf: true });
         lenisRef.current = lenis;
 
-        return () => {
-            lenis.destroy();
-            lenisRef.current = null;
-        };
+        return () => lenis.destroy();
     }, []);
+
 
     return (
         <>
