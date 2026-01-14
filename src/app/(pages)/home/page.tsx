@@ -8,20 +8,19 @@ import ShufflingCardsGrid from '@/components/ShufflingCardsGrid';
 import ProjectsFeatureSection from '@/components/ProjectsFeatureSection';
 import BlogSection from '@/components/BlogSection';
 import ExpandingHero from '@/components/ExpandingHero';
-import ServicesSection from '@/components/ServicesSection';
+// import ServicesSection from '@/components/ServicesSection';
 import TabLoader from '@/components/Loader';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import Wrapper from '@/app/Wrapper';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-// import ScrollTabsSection from '@/components/ScrollTabsSection';
 import dynamic from 'next/dynamic';
 
-const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
-  ssr: false,
-  loading: () => <div className="h-[60vh]" />,
-});
+// const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
+//   ssr: false,
+//   loading: () => <div className="h-[60vh]" />,
+// });
 
 export default function HomePage() {
   const handleAnimationComplete = () => {
@@ -29,13 +28,13 @@ export default function HomePage() {
 
   const [isVisible, setIsVisible] = useState(true);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsVisible(false);
-  //   }, 10000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 10000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Wrapper>
@@ -46,15 +45,6 @@ export default function HomePage() {
 
 
         <div className="relative">
-          {/* <video
-            className="absolute md:inline hidden inset-0 h-full w-full object-cover"
-            src="https://res.cloudinary.com/dixhnqcby/video/upload/v1765973067/videobg_d0ta23.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-          preload="auto"
-          /> */}
           <video
             autoPlay
             muted
@@ -74,7 +64,6 @@ export default function HomePage() {
             loop
             playsInline
             preload="metadata"
-          // preload="auto"
           >
             <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1767782166/mobile_ttipba.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -196,9 +185,9 @@ export default function HomePage() {
 
         </section>
 
-        <div className=" ">
+        {/* <div className=" ">
           <ScrollTabsSection />
-        </div>
+        </div> */}
 
         <ProjectsFeatureSection
           leftImage="/img17.png"
@@ -217,7 +206,7 @@ We are Bond and Vale. Redefining Influence."
         </div>
 
 
-        <ServicesSection
+        {/* <ServicesSection
           services={[
             {
               title: "Public Relations",
@@ -268,7 +257,7 @@ We are Bond and Vale. Redefining Influence."
               href: "/investor-relations"
             },
           ]}
-        />
+        /> */}
 
 
         <ExpandingHero imageSrc="/bg.png" quote='"We shape brands with clarity,

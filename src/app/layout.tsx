@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import "aos/dist/aos.css";
-import "lenis/dist/lenis.css";
+// import "aos/dist/aos.css";
+// import "lenis/dist/lenis.css";
 
 const inter = Inter({
   subsets: ["latin"],
