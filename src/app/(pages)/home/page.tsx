@@ -8,7 +8,7 @@ import ShufflingCardsGrid from '@/components/ShufflingCardsGrid';
 import ProjectsFeatureSection from '@/components/ProjectsFeatureSection';
 import BlogSection from '@/components/BlogSection';
 import ExpandingHero from '@/components/ExpandingHero';
-// import ServicesSection from '@/components/ServicesSection';
+import ServicesSection from '@/components/ServicesSection';
 import TabLoader from '@/components/Loader';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
@@ -17,10 +17,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
-// const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
-//   ssr: false,
-//   loading: () => <div className="h-[60vh]" />,
-// });
+const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
+  ssr: false,
+  loading: () => <div className="h-[60vh]" />,
+});
 
 export default function HomePage() {
   const handleAnimationComplete = () => {
@@ -73,7 +73,10 @@ export default function HomePage() {
           <section className="relative h-[calc(100vh-6rem)] w-full flex items-center justify-center overflow-hidden">
 
 
+
+
             <div className="relative z-[2] flex md:h-full w-full  flex-col ">
+              {/* Center Title */}
               <div className="flex flex-1 items-start justify-center px-4 pb-20 md:pb-0 md:pt-32">
                 <h1 className={`text-center font-[PPPangaia] uppercase leading-[0.95] transition-all duration-300 tracking-wide text-[#e6d7c4] drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] ${!isVisible ? 'opacity-0' : ''}`}>
                   <span className="block max-w-4xl leading-tight mx-auto text-center">
@@ -182,9 +185,9 @@ export default function HomePage() {
 
         </section>
 
-        {/* <div className=" ">
+        <div className=" ">
           <ScrollTabsSection />
-        </div> */}
+        </div>
 
         <ProjectsFeatureSection
           leftImage="/img17.png"
@@ -203,7 +206,7 @@ We are Bond and Vale. Redefining Influence."
         </div>
 
 
-        {/* <ServicesSection
+        <ServicesSection
           services={[
             {
               title: "Public Relations",
@@ -254,7 +257,7 @@ We are Bond and Vale. Redefining Influence."
               href: "/investor-relations"
             },
           ]}
-        /> */}
+        />
 
 
         <ExpandingHero imageSrc="/bg.png" quote='"We shape brands with clarity,

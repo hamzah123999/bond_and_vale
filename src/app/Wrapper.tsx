@@ -12,26 +12,28 @@ interface Props {
 export default function Wrapper({ children }: Props) {
     // const lenisRef = useRef<any>(null);
 
-    // useEffect(() => {
-    //     let lenis: any;
+    useEffect(() => {
+        // let lenis: any;
 
-    //     (async () => {
-    //         const [{ default: AOS }, { default: Lenis }] = await Promise.all([
-    //             import("aos"),
-    //             import("lenis"),
-    //         ]);
+        (async () => {
+            const [{ default: AOS }
+                // , { default: Lenis }
+            ] = await Promise.all([
+                import("aos"),
+                // import("lenis"),
+            ]);
 
-    // AOS.init({ once: true, duration: 800, delay: 100 });
+    AOS.init({ once: true, duration: 800, delay: 100 });
 
-    //         if (window.innerWidth < 768) return;
-    //         lenis = new Lenis({ autoRaf: true });
-    //         lenisRef.current = lenis;
-    //     })();
+            // if (window.innerWidth < 768) return;
+            // lenis = new Lenis({ autoRaf: true });
+            // lenisRef.current = lenis;
+        })();
 
-    //     return () => {
-    //         lenis?.destroy?.();
-    //     };
-    // }, []);
+        // return () => {
+        //     lenis?.destroy?.();
+        // };
+    }, []);
 
     return (
         <>
