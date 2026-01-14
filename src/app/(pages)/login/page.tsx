@@ -106,7 +106,7 @@ export default function AdminLoginPage() {
 
     return (
         <Wrapper>
-            <TabLoader direction="top" speed={1.4} minDuration={2000} />
+            <TabLoader />
             <main className="min-h-screen bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 
