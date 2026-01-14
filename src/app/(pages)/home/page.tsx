@@ -40,7 +40,7 @@ export default function HomePage() {
     <Wrapper>
       <div className='bg-[#e0d1be] min-h-screen'>
 
-        <TabLoader direction="top" speed={1.4} minDuration={2000} />
+        {/* <TabLoader direction="top" speed={1.4} minDuration={2000} /> */}
 
 
 
