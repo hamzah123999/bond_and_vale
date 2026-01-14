@@ -81,7 +81,7 @@ export default function ServiceDetailPage({
 
     return (
         <Wrapper>
-            <TabLoader direction="top" speed={1.4} minDuration={2000} />
+            <TabLoader />
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
 

@@ -134,8 +134,7 @@
 
 @font-face {
   font-family: "InterCustom";
-  src: url("https://cdn.prod.website-files.com/6798cba3ff70cd53ac01b30a/680217ce8a546c7b785f19e3_Inter_24pt-Regular.woff")
-      format("woff");
+  src: url("https://cdn.prod.website-files.com/6798cba3ff70cd53ac01b30a/680217ce8a546c7b785f19e3_Inter_24pt-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -176,6 +175,16 @@ body {
   opacity: 1;
 }
 
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
   background: #ab8b64 !important;
+}
+
+.tabloader {
+  transform: translateY(0);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.tabloader-hide {
+  transform: translateY(-100%);
 }

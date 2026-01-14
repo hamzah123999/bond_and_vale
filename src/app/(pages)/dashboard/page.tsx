@@ -137,7 +137,7 @@ export default function AdminDashboard() {
 
     return (
         <main className="min-h-screen bg-[#e0d1be] text-[#23352d]">
-            <TabLoader direction="top" speed={1.4} minDuration={2000} />
+            <TabLoader />
             <Header />
 
             <section className="mx-auto max-w-[1450px] px-4 lg:px-14 pt-14 lg:pt-20 pb-24">

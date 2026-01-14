@@ -193,7 +193,7 @@ const CalendlySection = memo(function CalendlySection() {
 export default function Contact() {
     return (
         <Wrapper>
-            <TabLoader direction="top" speed={1.4} minDuration={2000} />
+            <TabLoader />
             <div className="bg-[#e0d1be] min-h-screen">
                 <Header />
 

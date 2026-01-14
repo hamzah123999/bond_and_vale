@@ -7,7 +7,7 @@ import React from 'react'
 export default function Services() {
     return (
         <Wrapper>
-            <TabLoader direction="top" speed={1.4} minDuration={2000} />
+            <TabLoader />
             {/* <TabLoader direction="top" speed={1.4} /> */}
             <div className="bg-[#e0d1be] min-h-screen">
                 <Header />

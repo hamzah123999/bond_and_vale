@@ -61,7 +61,7 @@ export default function Blog() {
 
     return (
         <Wrapper>
-            <TabLoader direction="top" speed={1.4} minDuration={2000} />
+            <TabLoader  />
             <section className="bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 
