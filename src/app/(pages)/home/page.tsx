@@ -29,13 +29,13 @@ export default function HomePage() {
 
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 10000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsVisible(false);
+  //   }, 10000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <Wrapper>
@@ -46,22 +46,35 @@ export default function HomePage() {
 
 
         <div className="relative">
-          <video
+          {/* <video
             className="absolute md:inline hidden inset-0 h-full w-full object-cover"
             src="https://res.cloudinary.com/dixhnqcby/video/upload/v1765973067/videobg_d0ta23.mp4"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
-          />
+          preload="auto"
+          /> */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/img2.jpg"
+            className="absolute md:inline hidden inset-0 h-full w-full object-cover"
+            >
+            <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1765973067/videobg_d0ta23.mp4" type="video/mp4" />
+          </video>
+
           <video
             className="absolute md:hidden inset-0 h-full w-full object-cover"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+          // preload="auto"
           >
             <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1767782166/mobile_ttipba.mp4" type="video/mp4" />
             Your browser does not support the video tag.

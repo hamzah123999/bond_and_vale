@@ -1,5 +1,3 @@
-"use client";
-
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
 import TabLoader from "@/components/Loader";

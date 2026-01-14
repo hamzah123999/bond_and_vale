@@ -16,18 +16,43 @@ interface Props {
 
 export default function Wrapper({ children, className = "" }: Props) {
 
-    const lenisRef = useRef<Lenis | null>(null);
+    const lenisRef = useRef<any>(null);
 
     useEffect(() => {
-        AOS.init({ once: true, duration: 800, delay: 100 });
+        let lenis: any;
 
-        if (window.innerWidth < 768) return; // disable on mobile
+        (async () => {
+            // Only load these in the browser when needed
+            const [{ default: AOS }, { default: Lenis }] = await Promise.all([
+                import("aos"),
+                import("lenis"),
+            ]);
 
-        const lenis = new Lenis({ autoRaf: true });
-        lenisRef.current = lenis;
+            await import("aos/dist/aos.css");
+            await import("lenis/dist/lenis.css");
 
-        return () => lenis.destroy();
+            AOS.init({ once: true, duration: 800, delay: 100 });
+
+            if (window.innerWidth < 768) return;
+            lenis = new Lenis({ autoRaf: true });
+            lenisRef.current = lenis;
+        })();
+
+        return () => {
+            if (lenis) lenis.destroy?.();
+        };
     }, []);
+
+    // useEffect(() => {
+    //     AOS.init({ once: true, duration: 800, delay: 100 });
+
+    //     if (window.innerWidth < 768) return; // disable on mobile
+
+    //     const lenis = new Lenis({ autoRaf: true });
+    //     lenisRef.current = lenis;
+
+    //     return () => lenis.destroy();
+    // }, []);
 
 
     return (
