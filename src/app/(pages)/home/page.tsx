@@ -40,8 +40,7 @@ export default function HomePage() {
     <Wrapper>
       <div className='bg-[#e0d1be] min-h-screen'>
 
-        {/* <TabLoader direction="top" speed={1.4} minDuration={2000} /> */}
-
+        <TabLoader direction="top" speed={1.2} minDuration={1000} />
 
 
         <div className="relative">
@@ -53,7 +52,7 @@ export default function HomePage() {
             preload="metadata"
             poster="/img2.jpg"
             className="absolute md:inline hidden inset-0 h-full w-full object-cover"
-            >
+          >
             <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1765973067/videobg_d0ta23.mp4" type="video/mp4" />
           </video>
 
