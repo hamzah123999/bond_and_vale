@@ -6,22 +6,17 @@ import BlogSection from '@/components/BlogSection';
 import ExpandingHero from '@/components/ExpandingHero';
 import ServicesSection from '@/components/ServicesSection';
 import TabLoader from '@/components/Loader';
+import TestimonialsSlider from '@/components/TestimonialsSlider';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
 import Wrapper from '@/app/Wrapper';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
 import HeroClient from '@/components/HeroClient';
-
-const TestimonialsSlider = dynamic(() => import("@/components/TestimonialsSlider"), { ssr: false });
-
-const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
-  ssr: false,
-  loading: () => <div className="h-[60vh]" />,
-});
+import ScrollTabsSectionComp from '@/components/ScrollTabsSectionComp';
+import DoorRevealSectionComp from '@/components/DoorRevealSectionComp';
+import ShufflingCards from '@/components/ShufflingCards';
 
 export default function HomePage() {
-  const handleAnimationComplete = () => {
-  };
+
 
 
   return (
@@ -31,88 +26,13 @@ export default function HomePage() {
         <TabLoader />
 
         <HeroClient />
-        <DoorRevealSection
-          heightVh={240}
-          className=" bg-[#e6d7c4]"
-          background={
-            <div className="relative h-full w-full bg-[#e6d7c4]">
-              <div className="absolute inset-0 flex items-center justify-center px-6">
-                <div className="w-[min(2000px,85vw)]">
-                  <Image
-                    src="/door.svg"
-                    alt="Bond & Vale logo"
-                    width={2000}
-                    height={1200}
-                    className="w-full h-auto object-contain select-none"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-          }
-        >
-          <div className="text-[#0e221c]">
-            <div className=" ">
 
-              <SplitText
-                text="Strategic Communications
-            for Exceptional Brand Growth"
-                className="font-medium md:text-4xl font-[PPPangaia] uppercase text-xl mb-6"
-                delay={150}
-                duration={2}
-                splitType="lines"
-                from={{ opacity: 0, y: 100 }}
-                onLetterAnimationComplete={handleAnimationComplete}
-              />
-            </div>
-            <p className="text-lg">
+        <DoorRevealSectionComp />
 
-              At Bond & Vale, we’re an integrated communications consultancy
-              dedicated to helping brands grow with purpose, credibility and
-              trust.
-              Through our expertise in strategic storytelling, brand positioning
-              and digital innovation, we elevate visibility, strengthen reputation
-              and drive measurable long-term growth.
-              At Bond & Vale, we’re an integrated communications consultancy
-              dedicated to helping brands grow with purpose, credibility and
-              trust.
-              Through our expertise in strategic storytelling, brand positioning
-              and digital innovation, we elevate visibility, strengthen reputation
-              and drive measurable long-term growth.
-
-
-            </p>
-          </div>
-        </DoorRevealSection>
-
-        <section className="bg-[#e6d7c4] px-6 lg:px-14 py-16">
-          <h2 className=" ">
-            <SplitText
-              text="WE&apos;RE PROUD TO BE RECOGNIZED AS INDUSTRY LEADERS."
-              className="text-[#0e221c] md:text-6xl text-3xl uppercase !text-start max-w-3xl font-[PPPangaia] "
-              delay={150}
-              duration={2}
-              splitType="lines"
-              from={{ opacity: 0, y: 100 }}
-              onLetterAnimationComplete={handleAnimationComplete}
-            />
-
-          </h2>
-
-          <p data-aos="fade-up"
-            className="mt-6 max-w-3xl text-[#0e221c] tracking-wide uppercase mb-8">
-            Our work and insights are featured across top global publications. Our set of experiences is based on trust, transparency and a commitment to greatness
-          </p>
-
-          <ShufflingCardsGrid
-            movesPerTick={4}
-            animDuration={2}
-          />
-
-        </section>
+        <ShufflingCards />
 
         <div className=" ">
-          <ScrollTabsSection />
+          <ScrollTabsSectionComp />
         </div>
 
         <ProjectsFeatureSection
