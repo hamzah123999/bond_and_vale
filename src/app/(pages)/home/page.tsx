@@ -1,7 +1,3 @@
-"use client";
-
-import Header from '@/components/Header'
-import TicketButton from '@/components/TicketButton'
 import SplitText from '@/components/SplitText'
 import DoorRevealSection from '@/components/DoorRevealSection';
 import ShufflingCardsGrid from '@/components/ShufflingCardsGrid';
@@ -11,7 +7,6 @@ import ExpandingHero from '@/components/ExpandingHero';
 import ServicesSection from '@/components/ServicesSection';
 import TabLoader from '@/components/Loader';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
-// import TestimonialsSlider from '@/components/TestimonialsSlider';
 import Wrapper from '@/app/Wrapper';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
