@@ -8,7 +8,6 @@ import ServicesSection from '@/components/ServicesSection';
 import TabLoader from '@/components/Loader';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
 import Wrapper from '@/app/Wrapper';
-import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import HeroClient from '@/components/HeroClient';
