@@ -11,11 +11,14 @@ import ExpandingHero from '@/components/ExpandingHero';
 import ServicesSection from '@/components/ServicesSection';
 import TabLoader from '@/components/Loader';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
-import TestimonialsSlider from '@/components/TestimonialsSlider';
+// import TestimonialsSlider from '@/components/TestimonialsSlider';
 import Wrapper from '@/app/Wrapper';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import HeroClient from '@/components/HeroClient';
+
+const TestimonialsSlider = dynamic(() => import("@/components/TestimonialsSlider"), { ssr: false });
 
 const ScrollTabsSection = dynamic(() => import("@/components/ScrollTabsSection"), {
   ssr: false,
@@ -26,85 +29,14 @@ export default function HomePage() {
   const handleAnimationComplete = () => {
   };
 
-  const [isVisible, setIsVisible] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <Wrapper>
       <div className='bg-[#e0d1be] min-h-screen'>
 
-        {/* <TabLoader direction="top" speed={1.2} minDuration={1500} /> */}
         <TabLoader />
 
-
-        <div className="relative">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/img2.jpg"
-            className="absolute md:inline hidden inset-0 h-full w-full object-cover"
-          >
-            <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1765973067/videobg_d0ta23.mp4" type="video/mp4" />
-          </video>
-
-          <video
-            className="absolute md:hidden inset-0 h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          >
-            <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1767782166/mobile_ttipba.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="absolute inset-0 bg-black/50" />
-          <Header />
-          <section className="relative h-[calc(100vh-6rem)] w-full flex items-center justify-center overflow-hidden">
-
-
-
-
-            <div className="relative z-[2] flex md:h-full w-full  flex-col ">
-              {/* Center Title */}
-              <div className="flex flex-1 items-start justify-center px-4 pb-20 md:pb-0 md:pt-32">
-                <h1 className={`text-center font-[PPPangaia] uppercase leading-[0.95] transition-all duration-300 tracking-wide text-[#e6d7c4] drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] ${!isVisible ? 'opacity-0' : ''}`}>
-                  <span className="block max-w-4xl leading-tight mx-auto text-center">
-                    <SplitText
-                      text="Pay On Success. Communication that connects."
-                      className="text-[40px] sm:text-[70px] md:text-8xl text-center"
-                      delay={300}
-                      duration={2}
-                      splitType="lines"
-                      from={{ opacity: 0, y: 100 }}
-                      onLetterAnimationComplete={handleAnimationComplete}
-                    />
-                  </span>
-                </h1>
-              </div>
-
-              <div className="md:relative md:flex z-[3] hidden items-end  absolute bottom-5 justify-between md:px-6 px-3  lg:px-10 ">
-                <TicketButton href='/contact' label='Contact' />
-                <TicketButton href='/services' label='Services' />
-              </div>
-            </div>
-            <div className="md:hidden z-[3] flex items-end gap-5 absolute bottom-0 justify-between px-3 pb-6 lg:px-10">
-              <TicketButton href='/contact' label='Contact' />
-              <TicketButton href='/services' label='Services' />
-            </div>
-          </section>
-        </div>
-
+        <HeroClient />
         <DoorRevealSection
           heightVh={240}
           className=" bg-[#e6d7c4]"
