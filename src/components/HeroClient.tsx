@@ -60,10 +60,10 @@ export default function HeroClient() {
             {/* Background container */}
             <div ref={holderRef} className="absolute inset-0">
                 {/* Poster always visible immediately */}
-                <div
+                {/* <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{ backgroundImage: "url(/videoposter.jpg)" }}
-                />
+                /> */}
 
                 {/* Video always present, but source is injected only when ready */}
                 <video
@@ -72,7 +72,7 @@ export default function HeroClient() {
                     loop
                     playsInline
                     preload="none"
-                    poster="/img2.jpg"
+                    // poster="/img2.jpg"
                     className="absolute inset-0 h-full w-full object-cover"
                 >
                     {shouldLoad && videoSrc && <source src={videoSrc} type="video/mp4" />}
