@@ -62,7 +62,7 @@ export default function HeroClient() {
                 {/* Poster always visible immediately */}
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{ backgroundImage: "url(/img2.jpg)" }}
+                    style={{ backgroundImage: "url(/videoposter.jpg)" }}
                 />
 
                 {/* Video always present, but source is injected only when ready */}
