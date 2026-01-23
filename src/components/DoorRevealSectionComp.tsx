@@ -50,13 +50,7 @@ export default function DoorRevealSectionComp() {
                     Through our expertise in strategic storytelling, brand positioning
                     and digital innovation, we elevate visibility, strengthen reputation
                     and drive measurable long-term growth.
-                    At Bond & Vale, we’re an integrated communications consultancy
-                    dedicated to helping brands grow with purpose, credibility and
-                    trust.
-                    Through our expertise in strategic storytelling, brand positioning
-                    and digital innovation, we elevate visibility, strengthen reputation
-                    and drive measurable long-term growth.
-
+                
 
                 </p>
             </div>
