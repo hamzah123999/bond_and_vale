@@ -37,7 +37,7 @@ export default function ServiceDetailPage({
         image1: "img15.png",
         image2: "img7.jpg",
         video:
-            "https://res.cloudinary.com/dixhnqcby/video/upload/v1767780269/Video5_qhyu05.mp4",
+            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568016/Video_Brand_Consultancy_Fix_hmd5d0.mp4",
         videoPoster: "img7.jpg",
     },
 }: Props) {
@@ -181,7 +181,7 @@ export default function ServiceDetailPage({
                                     preload="metadata"
                                     poster={`/${heroMedia.videoPoster}`}
                                 >
-                                    <source src="https://res.cloudinary.com/dixhnqcby/video/upload/v1766196685/Video5_ipgk6w.mp4" type="video/mp4" />
+                                    <source src="https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568016/Video_Brand_Consultancy_Fix_hmd5d0.mp4" type="video/mp4" />
                                     {/* Fallback text */}
                                     Your browser does not support the video tag.
                                 </video>

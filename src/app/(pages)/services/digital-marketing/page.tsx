@@ -39,7 +39,7 @@ export default function ServiceDetailPage({
         image1: "img4.jpg",
         image2: "img10.jpg",
         video:
-            "https://res.cloudinary.com/dixhnqcby/video/upload/v1767780296/Video6_rpcdbd.mp4",
+            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568007/Video_Digital_Marketing_b4te6a.mp4",
         videoPoster: "img10.jpg",
     },
 }: Props) {
@@ -176,7 +176,7 @@ export default function ServiceDetailPage({
                             <div className="relative aspect-[16/10] h-full w-full">
                                 <video
                                     className="h-full w-full object-cover"
-                                    src={"https://res.cloudinary.com/dixhnqcby/video/upload/v1766196661/Video6_yebmco.mp4"}
+                                    src={"https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568007/Video_Digital_Marketing_b4te6a.mp4"}
                                     poster={`/${heroMedia.videoPoster}`}
                                     autoPlay
                                     muted

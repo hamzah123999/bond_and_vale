@@ -171,14 +171,14 @@ export default function AdminDashboard() {
                         </Link>
 
                         {/* ✅ Logout */}
-                        <button
+                        {/* <button
                             onClick={handleLogout}
                             disabled={loggingOut}
                             className="inline-flex items-center gap-2 rounded-full bg-red-500 px-5 py-3 text-sm text-[#fff] hover:bg-red-600 cursor-pointer transition disabled:opacity-60"
                         >
                             <LogOut className="h-4 w-4" />
                             {loggingOut ? "Logging out..." : "Logout"}
-                        </button>
+                        </button> */}
                     </div>
                 </div>
 
