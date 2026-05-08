@@ -239,7 +239,7 @@ const FooterBottom = memo(function FooterBottom() {
 
             <div className="flex justify-end md:flex-row flex-col text-center md:text-start gap-6">
                 <span>© 2025 Bond & Value. All rights reserved</span>
-                <span className="underline md:block hidden">Website by Quzex</span>
+                <span className="underline md:block hidden">Bond & Vale</span>
             </div>
         </div>
     );
