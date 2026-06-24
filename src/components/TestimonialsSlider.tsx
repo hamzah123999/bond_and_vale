@@ -85,7 +85,7 @@ export default function TestimonialsSlider({
                     </p>
                 </div>
 
-                <div className="mt-12 lg:mt-16" data-aos="fade -up">
+                <div className="mt-12 lg:mt-16" data-aos="fade-up">
                     <Swiper
                         onSwiper={(s) => (swiperRef.current = s)}
                         onSlideChange={(s) => setActive(s.realIndex)}

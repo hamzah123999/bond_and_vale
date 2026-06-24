@@ -1,13 +1,70 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+    motion,
+    useMotionValueEvent,
+    useScroll,
+    useTransform,
+    type MotionValue,
+} from "framer-motion";
 
 type Item = { title: string; body: string };
 type MediaItem = {
     image: { src: string; alt?: string };
     video: { src: string };
 };
+
+function MediaTile({
+    media,
+    idx,
+    activeIndex,
+    flexGrow,
+}: {
+    media: MediaItem;
+    idx: number;
+    activeIndex: MotionValue<number>;
+    flexGrow: MotionValue<number>;
+}) {
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const videoOpacity = useTransform(activeIndex, (a) => (a === idx ? 1 : 0));
+    const imageOpacity = useTransform(activeIndex, (a) => (a === idx ? 0 : 1));
+
+    useMotionValueEvent(activeIndex, "change", (a) => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (Math.round(a) === idx) {
+            void video.play().catch(() => {});
+        } else {
+            video.pause();
+        }
+    });
+
+    return (
+        <motion.div style={{ flexGrow, flexBasis: 0 }} className="overflow-hidden">
+            <div className="relative w-full h-[200px] md:h-[300px] lg:h-[320px] overflow-hidden">
+                <motion.video
+                    ref={videoRef}
+                    src={media.video.src}
+                    muted
+                    playsInline
+                    loop
+                    autoPlay
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ opacity: videoOpacity }}
+                />
+                <motion.img
+                    src={media.image.src}
+                    alt={media.image.alt ?? ""}
+                    draggable={false}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ opacity: imageOpacity }}
+                />
+            </div>
+        </motion.div>
+    );
+}
 
 export default function ScrollSnapTabs() {
     const items = useMemo<Item[]>(
@@ -229,44 +286,15 @@ export default function ScrollSnapTabs() {
 
                         <div className="absolute left-1/2 top-[70%] w-full max-w-7xl -translate-x-1/2 -translate-y-1/2 px-6 md:px-10">
                             <div className="flex w-full md:gap-6 gap-2 items-stretch">
-                                {media.map((m, idx) => {
-                                    const flexGrow = makeGrow(idx);
-
-                                    return (
-                                        <motion.div
-                                            key={idx}
-                                            style={{ flexGrow, flexBasis: 0 }}
-                                            className="overflow-hidden"
-                                        >
-                                            <div className="relative w-full h-[200px] md:h-[300px] lg:h-[320px] overflow-hidden">
-                                                <motion.video
-                                                    src={m.video.src}
-                                                    muted
-                                                    playsInline
-                                                    loop
-                                                    autoPlay
-                                                    className="absolute inset-0 h-full w-full object-cover"
-                                                    style={{
-                                                        opacity: useTransform(activeIndex, (a) =>
-                                                            a === idx ? 1 : 0
-                                                        ),
-                                                    }}
-                                                />
-                                                <motion.img
-                                                    src={m.image.src}
-                                                    alt={m.image.alt ?? ""}
-                                                    draggable={false}
-                                                    className="absolute inset-0 h-full w-full object-cover"
-                                                    style={{
-                                                        opacity: useTransform(activeIndex, (a) =>
-                                                            a === idx ? 0 : 1
-                                                        ),
-                                                    }}
-                                                />
-                                            </div>
-                                        </motion.div>
-                                    );
-                                })}
+                                {media.map((m, idx) => (
+                                    <MediaTile
+                                        key={idx}
+                                        media={m}
+                                        idx={idx}
+                                        activeIndex={activeIndex}
+                                        flexGrow={makeGrow(idx)}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>

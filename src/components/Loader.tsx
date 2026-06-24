@@ -3,18 +3,31 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+const LOADER_SEEN_KEY = "bond-vale-loader-seen";
+const ANIM_MS = 800;
+const UNLOCK_MS = 1200;
+
+function hasSeenLoader() {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem(LOADER_SEEN_KEY) === "1";
+}
+
 export default function TabLoader() {
+    const [skip] = useState(() => hasSeenLoader());
     const [hide, setHide] = useState(false);
 
     useEffect(() => {
+        if (skip) return;
+
         const prev = document.body.style.overflow;
         document.body.style.overflow = "hidden";
 
-        const t1 = window.setTimeout(() => setHide(true), 1000);
+        const t1 = window.setTimeout(() => setHide(true), ANIM_MS);
 
         const t2 = window.setTimeout(() => {
             document.body.style.overflow = prev;
-        }, 1900);
+            sessionStorage.setItem(LOADER_SEEN_KEY, "1");
+        }, UNLOCK_MS);
 
         return () => {
             window.clearTimeout(t1);
@@ -22,6 +35,8 @@ export default function TabLoader() {
             document.body.style.overflow = prev;
         };
     }, []);
+
+    if (skip) return null;
 
     return (
         <div

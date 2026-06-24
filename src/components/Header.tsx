@@ -96,16 +96,21 @@ export default function Header() {
   const [changeColor, setChangeColor] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (path !== "/" || window.scrollY > 100) {
-        setChangeColor(true);
-      } else {
-        setChangeColor(false);
-      }
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const shouldChange = path !== "/" || window.scrollY > 100;
+        setChangeColor((prev) => (prev === shouldChange ? prev : shouldChange));
+        ticking = false;
+      });
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [path]);
 

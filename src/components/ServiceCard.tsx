@@ -44,9 +44,11 @@ export default function ServiceCard({
         v.currentTime = 0;
     };
 
+    const servicePath = `/services/${href.replace(/^\//, "")}`;
+
     return (
         <Link
-            href={`/services/${href}`}
+            href={servicePath}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             onFocus={onEnter}

@@ -1,6 +1,3 @@
-import SplitText from '@/components/SplitText'
-import DoorRevealSection from '@/components/DoorRevealSection';
-import ShufflingCardsGrid from '@/components/ShufflingCardsGrid';
 import ProjectsFeatureSection from '@/components/ProjectsFeatureSection';
 import BlogSection from '@/components/BlogSection';
 import ExpandingHero from '@/components/ExpandingHero';
@@ -9,7 +6,6 @@ import TabLoader from '@/components/Loader';
 import TestimonialsSlider from '@/components/TestimonialsSlider';
 import FlowingMenuComp from '@/components/FlowingMenuComp';
 import Wrapper from '@/app/Wrapper';
-import Image from 'next/image';
 import HeroClient from '@/components/HeroClient';
 import ScrollTabsSectionComp from '@/components/ScrollTabsSectionComp';
 import DoorRevealSectionComp from '@/components/DoorRevealSectionComp';
