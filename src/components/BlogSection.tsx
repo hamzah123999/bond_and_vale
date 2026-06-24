@@ -6,6 +6,7 @@ import axios from "axios";
 import TicketButton from "@/components/TicketButton";
 import DecryptedText from "./DecryptedText";
 import SplitText from "./SplitText";
+import FadeUp from "./FadeUp";
 
 type BlogItem = {
     href: string;
@@ -91,9 +92,9 @@ export default function BlogSection({
 
                 <div className="mt-10 grid grid-cols-1 lg:grid-cols-[0.9fr_1.6fr] gap-10 lg:gap-16">
                     <div className="flex md:pt-7">
-                        <p data-aos="fade-up" className="max-w-md text-[#0e221c]/70">
+                        <FadeUp className="max-w-md text-[#0e221c]/70">
                             {intro}
-                        </p>
+                        </FadeUp>
                     </div>
 
                     <div className="flex flex-col">
@@ -110,10 +111,9 @@ export default function BlogSection({
                                 </div>
                             ) : (
                                 items.map((item) => (
+                                    <FadeUp key={item.href}>
                                     <Link
-                                        key={item.href}
                                         href={item.href}
-                                        data-aos="fade-up"
                                         className="group grid grid-cols-1 md:items-end md:grid-cols-[1.1fr_1.5fr] gap-3 md:gap-8 py-7"
                                     >
                                         <div>
@@ -138,6 +138,7 @@ export default function BlogSection({
                                             </span>
                                         </div>
                                     </Link>
+                                    </FadeUp>
                                 ))
                             )}
                         </div>

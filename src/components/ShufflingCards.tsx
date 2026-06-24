@@ -2,6 +2,7 @@
 import React from 'react'
 import SplitText from './SplitText'
 import ShufflingCardsGrid from './ShufflingCardsGrid'
+import FadeUp from './FadeUp'
 
 export default function ShufflingCards() {
     const handleAnimationComplete = () => {
@@ -21,14 +22,16 @@ export default function ShufflingCards() {
 
             </h2>
 
-            <p data-aos="fade-up"
-                className="mt-6 max-w-3xl text-[#0e221c] tracking-wide uppercase mb-8">
+            <FadeUp
+                className="mt-6 max-w-3xl text-[#0e221c] tracking-wide uppercase mb-8"
+            >
                 Our work and insights are featured across top global publications. Our set of experiences is based on trust, transparency and a commitment to greatness
-            </p>
+            </FadeUp>
 
             <ShufflingCardsGrid
-                movesPerTick={4}
-                animDuration={2}
+                intervalMs={4000}
+                movesPerTick={2}
+                animDuration={0.9}
             />
 
         </section>

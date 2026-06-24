@@ -44,9 +44,9 @@ const items = [
 ] satisfies CardItem[];
 
 export default function ShufflingCardsGrid({
-  intervalMs = 2200,
-  movesPerTick = 3,
-  animDuration = 1.2,
+  intervalMs = 4000,
+  movesPerTick = 2,
+  animDuration = 0.9,
   className = "",
 }: {
   intervalMs?: number;
@@ -54,18 +54,14 @@ export default function ShufflingCardsGrid({
   animDuration?: number;
   className?: string;
 }) {
-  const [order, setOrder] = useState(items.map((i) => i.id));
+  const [order, setOrder] = useState(() => items.map((i) => i.id));
   const [enableShuffle, setEnableShuffle] = useState(false);
 
   const byId = useMemo(() => {
     const map = new Map<string, CardItem>();
     items.forEach((i) => map.set(i.id, i));
     return map;
-  }, [items]);
-
-  useEffect(() => {
-    setOrder(items.map((i) => i.id));
-  }, [items]);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -84,7 +80,6 @@ export default function ShufflingCardsGrid({
 
   useEffect(() => {
     if (!enableShuffle) {
-      setOrder(items.map((i) => i.id));
       return;
     }
 
@@ -110,7 +105,7 @@ export default function ShufflingCardsGrid({
     }, intervalMs);
 
     return () => clearInterval(t);
-  }, [enableShuffle, intervalMs, movesPerTick, items]);
+  }, [enableShuffle, intervalMs, movesPerTick]);
 
   const orderedItems = order.map((id) => byId.get(id)!).filter(Boolean);
 
@@ -120,7 +115,7 @@ export default function ShufflingCardsGrid({
         {orderedItems.map((item) => (
           <motion.div
             key={item.id}
-            layout
+            layout="position"
             transition={{
               duration: animDuration,
               ease: [0.22, 1, 0.36, 1],
@@ -131,6 +126,8 @@ export default function ShufflingCardsGrid({
               <img
                 src={item.img}
                 alt={item.title ?? "card"}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             ) : (

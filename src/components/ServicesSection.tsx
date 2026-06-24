@@ -2,6 +2,7 @@
 
 import ServiceCard from "@/components/ServiceCard";
 import SplitText from "./SplitText";
+import FadeUp from "@/components/FadeUp";
 
 type Service = {
     title: string;
@@ -55,11 +56,10 @@ export default function ServicesSection({
                         />
                     </h2>
 
-                    <div data-aos="fade-up"
-                        className="mt-6 max-w-xl  text-[#23352d]/65 text-sm uppercase tracking-widest leading-6">
+                    <FadeUp className="mt-6 max-w-xl text-[#23352d]/65 text-sm uppercase tracking-widest leading-6">
                         <div>{sub1}</div>
                         <div>{sub2}</div>
-                    </div>
+                    </FadeUp>
                 </div>
 
                 {/* Cards */}

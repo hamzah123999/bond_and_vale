@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { ArrowRight, Instagram, Facebook, Linkedin } from "lucide-react";
-import DecryptedText from "@/components/DecryptedText";
 import { usePathname } from "next/navigation";
 
 export default function Header() {
@@ -174,99 +173,43 @@ export default function Header() {
             {changeColor ? (
               <nav className="navbar-items hidden items-center gap-10 lg:flex">
                 <Link href="/" className="text_rg-button text-black/90 hover:text-black">
-                  <DecryptedText
-                    text="Home"
-                    className="text-black "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-black cursor-pointer"
-                    speed={50}
-                  />
+                  Home
                 </Link>
                 <Link
                   href="/services"
                   className="text_rg-button text-black/90 hover:text-black"
                 >
-                  <DecryptedText
-                    text="Services"
-                    className="text-black "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-black cursor-pointer"
-                    speed={50}
-                  />
+                  Services
                 </Link>
                 <Link href="/blog" className="text_rg-button text-black/90 hover:text-black">
-                  <DecryptedText
-                    text="Blog"
-                    className="text-black "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-black cursor-pointer"
-                    speed={50}
-                  />
+                  Blog
                 </Link>
                 <Link
                   href="/contact"
                   className="text_rg-button text-black/90 hover:text-black"
                 >
-                  <DecryptedText
-                    text="Contact"
-                    className="text-black "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-black cursor-pointer"
-                    speed={50}
-                  />
+                  Contact
                 </Link>
               </nav>
             ) : (
               <nav className="navbar-items hidden items-center gap-10 lg:flex">
                 <Link href="/" className="text_rg-button text-white/90 hover:text-white">
-                  <DecryptedText
-                    text="Home"
-                    className="text-white "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-white cursor-pointer"
-                    speed={50}
-                  />
+                  Home
                 </Link>
                 <Link
                   href="/services"
                   className="text_rg-button text-white/90 hover:text-white"
                 >
-                  <DecryptedText
-                    text="Services"
-                    className="text-white "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-white cursor-pointer"
-                    speed={50}
-                  />
+                  Services
                 </Link>
                 <Link href="/blog" className="text_rg-button text-white/90 hover:text-white">
-                  <DecryptedText
-                    text="Blog"
-                    className="text-white "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-white cursor-pointer"
-                    speed={50}
-                  />
+                  Blog
                 </Link>
                 <Link
                   href="/contact"
                   className="text_rg-button text-white/90 hover:text-white"
                 >
-                  <DecryptedText
-                    text="Contact"
-                    className="text-white "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-white cursor-pointer"
-                    speed={50}
-                  />
+                  Contact
                 </Link>
               </nav>
             )}
@@ -278,16 +221,7 @@ export default function Header() {
                   className="contact-button hidden items-center gap-3 lg:inline-flex"
                   onClick={closeMenu}
                 >
-                  <div className="text-black/90 hover:text-black">
-                    <DecryptedText
-                      text="Let's Bond"
-                      className="text-black "
-                      useOriginalCharsOnly
-                      animateOn="hover"
-                      parentClassName="text-black cursor-pointer"
-                      speed={50}
-                    />
-                  </div>
+                  <div className="text-black/90 hover:text-black">Let&apos;s Bond</div>
                   <ArrowRight className="h-4 w-4 text-black/90" />
                 </Link>
 
@@ -298,14 +232,7 @@ export default function Header() {
                   aria-controls={navId}
                   onClick={toggleMenu}
                 >
-                  <DecryptedText
-                    text="menu"
-                    className="text-black "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-black cursor-pointer"
-                    speed={50}
-                  />
+                  menu
                 </button>
               </div>
             ) : (
@@ -315,16 +242,7 @@ export default function Header() {
                   className="contact-button hidden items-center gap-3 lg:inline-flex"
                   onClick={closeMenu}
                 >
-                  <div className="text-white/90 hover:text-white">
-                    <DecryptedText
-                      text="Let's Bond"
-                      className="text-white "
-                      useOriginalCharsOnly
-                      animateOn="hover"
-                      parentClassName="text-white cursor-pointer"
-                      speed={50}
-                    />
-                  </div>
+                  <div className="text-white/90 hover:text-white">Let&apos;s Bond</div>
                   <ArrowRight className="h-4 w-4 text-white/90" />
                 </Link>
 
@@ -335,14 +253,7 @@ export default function Header() {
                   aria-controls={navId}
                   onClick={toggleMenu}
                 >
-                  <DecryptedText
-                    text="menu"
-                    className="text-white "
-                    useOriginalCharsOnly
-                    animateOn="hover"
-                    parentClassName="text-white cursor-pointer"
-                    speed={50}
-                  />
+                  menu
                 </button>
               </div>
             )}
@@ -449,14 +360,7 @@ export default function Header() {
                     onClick={closeMenu}
                     className="absolute right-0 top-0 inline-flex cursor-pointer items-center gap-2 text-white/90 hover:text-white"
                   >
-                    <DecryptedText
-                      text="close"
-                      className="text-white "
-                      useOriginalCharsOnly
-                      animateOn="hover"
-                      parentClassName="text-white cursor-pointer"
-                      speed={50}
-                    />
+                    close
                   </button>
                 </div>
 

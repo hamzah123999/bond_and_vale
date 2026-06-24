@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import FadeUp from "@/components/FadeUp";
 
 type ServiceCardProps = {
     href?: string;
@@ -47,13 +48,13 @@ export default function ServiceCard({
     const servicePath = `/services/${href.replace(/^\//, "")}`;
 
     return (
+        <FadeUp>
         <Link
             href={servicePath}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             onFocus={onEnter}
             onBlur={onLeave}
-            data-aos="fade-up"
             className="group block border border-black/25 bg-transparent"
         >
             {/* Media */}
@@ -103,5 +104,6 @@ export default function ServiceCard({
                 </div>
             </div>
         </Link>
+        </FadeUp>
     );
 }

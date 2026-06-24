@@ -15,6 +15,94 @@ type MediaItem = {
     video: { src: string };
 };
 
+const SWITCH = 0.5;
+const HOLD = 0.18;
+
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+function TabTextPanel({
+    idx,
+    item,
+    scrollYProgress,
+    clipW,
+    transitions,
+}: {
+    idx: number;
+    item: Item;
+    scrollYProgress: MotionValue<number>;
+    clipW: number;
+    transitions: number;
+}) {
+    const x = useTransform(scrollYProgress, (p) => {
+        const w = clipW || 0;
+        const v = p * transitions;
+        const t = Math.floor(v);
+        const local = v - t;
+        const current = t;
+        const next = t + 1;
+
+        if (idx === current) {
+            if (local <= HOLD) return 0;
+            const denom = Math.max(1e-6, SWITCH - HOLD);
+            const tt = clamp01((local - HOLD) / denom);
+            return lerp(0, -w, tt);
+        }
+
+        if (idx === next) {
+            if (local < SWITCH) return -w;
+            const tt = clamp01((local - SWITCH) / (1 - SWITCH));
+            return lerp(-w, 0, tt);
+        }
+
+        return -w;
+    });
+
+    const opacity = useTransform(scrollYProgress, (p) => {
+        const v = p * transitions;
+        const t = Math.floor(v);
+        const local = v - t;
+        const current = t;
+        const next = t + 1;
+        const fadeZone = 0.18;
+
+        if (idx === current) {
+            if (local <= HOLD) return 1;
+            const startFade = Math.max(HOLD, SWITCH - fadeZone);
+            if (local <= startFade) return 1;
+            if (local >= SWITCH) return 0;
+            const tt = (local - startFade) / Math.max(1e-6, SWITCH - startFade);
+            return lerp(1, 0, clamp01(tt));
+        }
+
+        if (idx === next) {
+            const endFade = Math.min(1, SWITCH + fadeZone);
+            if (local <= SWITCH) return 0;
+            if (local >= endFade) return 1;
+            const tt = (local - SWITCH) / Math.max(1e-6, endFade - SWITCH);
+            return lerp(0, 1, clamp01(tt));
+        }
+
+        return 0;
+    });
+
+    return (
+        <motion.div
+            style={{ opacity }}
+            className="absolute left-1/2 top-[32%] w-full max-w-7xl -translate-x-1/2 -translate-y-1/2 px-6 md:px-10 pointer-events-none"
+        >
+            <motion.div style={{ x }} className="will-change-transform">
+                <h2 className="font-[PPPangaia] uppercase text-[#122620] md:text-6xl text-3xl tracking-wide">
+                    {item.title}
+                </h2>
+                <p className="md:mt-6 mt-3 max-w-5xl text-[#50594f] text-sm md:text-base md:leading-relaxed tracking-[0.08em] uppercase">
+                    {item.body}
+                </p>
+            </motion.div>
+        </motion.div>
+    );
+}
+
 function MediaTile({
     media,
     idx,
@@ -63,6 +151,39 @@ function MediaTile({
                 />
             </div>
         </motion.div>
+    );
+}
+
+function MediaTileWithGrow({
+    idx,
+    media,
+    activeIndex,
+    scrollYProgress,
+    transitions,
+    growPresets,
+    itemCount,
+}: {
+    idx: number;
+    media: MediaItem;
+    activeIndex: MotionValue<number>;
+    scrollYProgress: MotionValue<number>;
+    transitions: number;
+    growPresets: number[][];
+    itemCount: number;
+}) {
+    const flexGrow = useTransform(scrollYProgress, (p) => {
+        const v = p * transitions;
+        const t = Math.floor(v);
+        const local = clamp01(v - t);
+        const a = Math.max(0, Math.min(itemCount - 1, t));
+        const b = Math.max(0, Math.min(itemCount - 1, t + 1));
+        const start = growPresets[a]?.[idx] ?? 1;
+        const end = growPresets[b]?.[idx] ?? start;
+        return lerp(start, end, local);
+    });
+
+    return (
+        <MediaTile media={media} idx={idx} activeIndex={activeIndex} flexGrow={flexGrow} />
     );
 }
 
@@ -134,82 +255,6 @@ export default function ScrollSnapTabs() {
 
     const transitions = Math.max(1, items.length - 1);
 
-    const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-    // When switching from current -> next
-    const SWITCH = 0.5;
-
-    // "Pause" while the CURRENT text is fully visible (scroll still happens, but x stays at 0).
-    // This is scroll-distance based (feels like ~a short "1s" hold during typical scroll).
-    // Increase for longer hold. Must be < SWITCH.
-    const HOLD = 0.18;
-
-    const makeX = (i: number) =>
-        useTransform(scrollYProgress, (p) => {
-            const w = clipW || 0;
-            const v = p * transitions;
-            const t = Math.floor(v);
-            const local = v - t;
-
-            const current = t;
-            const next = t + 1;
-
-            // CURRENT: stay for HOLD, then slide out until SWITCH
-            if (i === current) {
-                if (local <= HOLD) return 0;
-
-                const denom = Math.max(1e-6, SWITCH - HOLD);
-                const tt = clamp01((local - HOLD) / denom);
-                return lerp(0, -w, tt);
-            }
-
-            // NEXT: stays offscreen until SWITCH, then slides in until end
-            if (i === next) {
-                if (local < SWITCH) return -w;
-                const tt = clamp01((local - SWITCH) / (1 - SWITCH));
-                return lerp(-w, 0, tt);
-            }
-
-            return -w;
-        });
-
-    const makeOpacity = (i: number) =>
-        useTransform(scrollYProgress, (p) => {
-            const v = p * transitions;
-            const t = Math.floor(v);
-            const local = v - t;
-
-            const current = t;
-            const next = t + 1;
-
-            const fadeZone = 0.18;
-
-            if (i === current) {
-                // Always fully visible during HOLD
-                if (local <= HOLD) return 1;
-
-                // Fade-out happens near SWITCH (same as before), but current is still "present" after HOLD
-                const startFade = Math.max(HOLD, SWITCH - fadeZone);
-                if (local <= startFade) return 1;
-                if (local >= SWITCH) return 0;
-
-                const tt = (local - startFade) / Math.max(1e-6, SWITCH - startFade);
-                return lerp(1, 0, clamp01(tt));
-            }
-
-            if (i === next) {
-                const endFade = Math.min(1, SWITCH + fadeZone);
-                if (local <= SWITCH) return 0;
-                if (local >= endFade) return 1;
-
-                const tt = (local - SWITCH) / Math.max(1e-6, endFade - SWITCH);
-                return lerp(0, 1, clamp01(tt));
-            }
-
-            return 0;
-        });
-
     const growPresets = useMemo(() => {
         const big = 3;
         const small = 1;
@@ -220,31 +265,13 @@ export default function ScrollSnapTabs() {
         });
     }, [items, media.length]);
 
-    const makeGrow = (idx: number) =>
-        useTransform(scrollYProgress, (p) => {
-            const v = p * transitions;
-            const t = Math.floor(v);
-            const local = clamp01(v - t);
-
-            const a = Math.max(0, Math.min(items.length - 1, t));
-            const b = Math.max(0, Math.min(items.length - 1, t + 1));
-
-            const start = growPresets[a]?.[idx] ?? 1;
-            const end = growPresets[b]?.[idx] ?? start;
-
-            return lerp(start, end, local);
-        });
-
-    const makeActiveIndex = () =>
-        useTransform(scrollYProgress, (p) => {
-            const v = p * transitions;
-            const t = Math.floor(v);
-            const local = v - t;
-            const active = local < SWITCH ? t : t + 1;
-            return Math.max(0, Math.min(items.length - 1, active));
-        });
-
-    const activeIndex = makeActiveIndex();
+    const activeIndex = useTransform(scrollYProgress, (p) => {
+        const v = p * transitions;
+        const t = Math.floor(v);
+        const local = v - t;
+        const active = local < SWITCH ? t : t + 1;
+        return Math.max(0, Math.min(items.length - 1, active));
+    });
 
     const sectionHeightVh = items.length * 250;
 
@@ -262,37 +289,29 @@ export default function ScrollSnapTabs() {
                     >
                         <div className="relative h-[1px] w-full" />
 
-                        {items.map((item, idx) => {
-                            const x = makeX(idx);
-                            const opacity = makeOpacity(idx);
-
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    style={{ opacity }}
-                                    className="absolute left-1/2 top-[32%] w-full max-w-7xl -translate-x-1/2 -translate-y-1/2 px-6 md:px-10 pointer-events-none"
-                                >
-                                    <motion.div style={{ x }} className="will-change-transform">
-                                        <h2 className="font-[PPPangaia] uppercase text-[#122620] md:text-6xl text-3xl tracking-wide">
-                                            {item.title}
-                                        </h2>
-                                        <p className="md:mt-6 mt-3 max-w-5xl text-[#50594f] text-sm md:text-base md:leading-relaxed tracking-[0.08em] uppercase">
-                                            {item.body}
-                                        </p>
-                                    </motion.div>
-                                </motion.div>
-                            );
-                        })}
+                        {items.map((item, idx) => (
+                            <TabTextPanel
+                                key={item.title}
+                                idx={idx}
+                                item={item}
+                                scrollYProgress={scrollYProgress}
+                                clipW={clipW}
+                                transitions={transitions}
+                            />
+                        ))}
 
                         <div className="absolute left-1/2 top-[70%] w-full max-w-7xl -translate-x-1/2 -translate-y-1/2 px-6 md:px-10">
                             <div className="flex w-full md:gap-6 gap-2 items-stretch">
                                 {media.map((m, idx) => (
-                                    <MediaTile
-                                        key={idx}
-                                        media={m}
+                                    <MediaTileWithGrow
+                                        key={m.image.src}
                                         idx={idx}
+                                        media={m}
                                         activeIndex={activeIndex}
-                                        flexGrow={makeGrow(idx)}
+                                        scrollYProgress={scrollYProgress}
+                                        transitions={transitions}
+                                        growPresets={growPresets}
+                                        itemCount={items.length}
                                     />
                                 ))}
                             </div>
