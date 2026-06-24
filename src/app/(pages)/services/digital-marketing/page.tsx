@@ -30,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Digital Marketing",
     subtitle =
-    "Narrative-led systems that build trust — and move audiences from awareness to action.",
+    "Marketing built on clear stories, trust, and measurable action.",
     tags = [
         "Narrative Systems",
         "Strategy-Led",
@@ -44,7 +44,7 @@ export default function ServiceDetailPage({
         { label: "Approach", value: "Integrated" },
     ],
     heroMedia = {
-        image1: "img4.jpg",
+        image1: "img4.webp",
         image2: "img10.webp",
         video: SERVICE_VIDEO_URLS["digital-marketing"],
         videoPoster: "img10.webp",
@@ -62,7 +62,7 @@ export default function ServiceDetailPage({
     const process = [
         {
             title: "Discover",
-            body: "Align goals, audience, and landscape.",
+            body: "Align goals, audience, and market context.",
         },
         {
             title: "Shape the Story",
@@ -231,12 +231,11 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                In a noisy digital landscape, performance is no longer about volume —
-                                it is about clarity, story, and intelligence. Bond & Vale creates
-                                narrative-led marketing systems that build trust and move audiences
-                                from awareness to action. We focus on influence, not impressions.
-                                Our engagements are selective, senior-led, and integrated across the
-                                full communications ecosystem.
+                                Digital marketing works when the message is clear and the strategy
+                                is sound. Bond & Vale builds campaigns that earn trust and move
+                                people from awareness to action. We care about influence, not empty
+                                impressions. Our work is senior-led, selective, and connected to
+                                the rest of your communications.
                             </p>
 
                             {/* Deliverables */}

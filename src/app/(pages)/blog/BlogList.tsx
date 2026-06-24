@@ -30,10 +30,9 @@ export default function BlogList({ posts }: { posts: PublicBlogPost[] }) {
                         </div>
 
                         <p className="mt-6 leading-6 md:leading-7 text-[#0e221c]/60">
-                            The Bond &amp; Vale journal explores branding, public relations, and strategic
-                            communication through a thoughtful lens. Here we share insights, perspectives,
-                            and practical guidance on building strong narratives, shaping reputation, and
-                            creating long-term brand value in a changing landscape.
+                            The Bond &amp; Vale journal covers branding, PR, and communication.
+                            We share practical notes on building a strong reputation, telling a
+                            clear story, and growing a brand over time.
                         </p>
                     </div>
 

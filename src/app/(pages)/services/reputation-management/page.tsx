@@ -30,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Reputation Management",
     subtitle =
-    "Discretion, rigor, and narrative precision — protecting credibility when it matters most.",
+    "Discretion, rigor, and clear messaging. We protect credibility when it matters most.",
     tags = [
         "Crisis Readiness",
         "Narrative Control",
@@ -45,9 +45,9 @@ export default function ServiceDetailPage({
     ],
     heroMedia = {
         image1: "img13.png",
-        image2: "img5.jpg",
+        image2: "img5.webp",
         video: SERVICE_VIDEO_URLS["reputation-management"],
-        videoPoster: "img5.jpg",
+        videoPoster: "img5.webp",
     },
 }: Props) {
     const deliverables = [
@@ -69,7 +69,7 @@ export default function ServiceDetailPage({
         },
         {
             title: "Build Authority",
-            body: "Leverage Tier-1 placements and thought-leadership.",
+            body: "Use top-tier coverage and thought leadership to strengthen trust.",
         },
         {
             title: "Amplify",
@@ -230,14 +230,12 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                Reputation is the most valuable asset a leader or company holds —
-                                and the most fragile. Bond & Vale safeguards credibility by
-                                balancing narrative precision with real-world pragmatism. We
-                                operate with the discretion of a private office and the rigor of
-                                a global consultancy. From proactive thought-leadership to
-                                high-stakes stabilization, we build influence structures that
-                                support long-term brand equity. Reputation is not static. We
-                                ensure it works in your favor today and into the future.
+                                Reputation is often a company's most valuable asset, and one of
+                                the easiest to damage. Bond & Vale protects credibility with clear
+                                messaging and practical advice. We work with the discretion of a
+                                private office and the rigor of a global firm. From proactive
+                                thought leadership to high-stakes situations, we help you build
+                                trust that lasts.
                             </p>
 
                             {/* Deliverables */}

@@ -30,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Website Development",
     subtitle =
-    "Narrative-led design. Conversion-intelligent builds. Performance that feels effortless.",
+    "Clear design, fast builds, and websites that convert.",
     tags = [
         "Web Design",
         "UX/UI",
@@ -45,9 +45,9 @@ export default function ServiceDetailPage({
     ],
     heroMedia = {
         image1: "img14.png",
-        image2: "img6.jpg",
+        image2: "img6.webp",
         video: SERVICE_VIDEO_URLS["website-development"],
-        videoPoster: "img6.jpg",
+        videoPoster: "img6.webp",
     },
 }: Props) {
     const deliverables = [
@@ -231,12 +231,11 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                Your website is not a page — it is proof. It is your sales engine,
-                                your public office, your reputation in motion. At Bond & Vale, we
-                                build narrative-led, conversion-intelligent digital platforms that
-                                elevate positioning and drive meaningful action. Built in partnership
-                                with a world-class development studio, each experience is crafted to
-                                the level of refinement leaders expect.
+                                Your website is often the first proof point for your business.
+                                It needs to look sharp, load fast, and make the next step obvious.
+                                Bond & Vale builds sites with clear structure, strong copy, and
+                                performance in mind. Each project is handled with care and built
+                                to support your wider brand and sales goals.
                             </p>
 
                             {/* Deliverables */}

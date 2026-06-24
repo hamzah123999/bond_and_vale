@@ -42,10 +42,10 @@ export default function ServiceDetailPage({
         { label: "Approach", value: "Bespoke" },
     ],
     heroMedia = {
-        image1: "img15.png",
-        image2: "img7.jpg",
+        image1: "img15.webp",
+        image2: "img7.webp",
         video: SERVICE_VIDEO_URLS["brand-consultancy"],
-        videoPoster: "img7.jpg",
+        videoPoster: "img7.webp",
     },
 }: Props) {
     const deliverables = [
@@ -229,14 +229,11 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                A brand is not a logo — it’s a language. A system of meaning that
-                                defines how an audience sees, speaks about, and connects with you.
-                                At Bond & Vale, we approach brand building with the understanding
-                                that identity is earned, not simply designed. We create brands with
-                                gravity, built from narrative truth, cultural insight, and commercial
-                                intention. We don’t chase trends. We build architecture that lasts.
-                                We build meaning. We build desire. We build brands that live beyond
-                                the page.
+                                A brand is more than a logo. It is how people understand you,
+                                talk about you, and decide to trust you. At Bond & Vale, we build
+                                brands with substance: clear positioning, strong identity, and
+                                messaging that holds up over time. We do not chase trends. We build
+                                brands that last.
                             </p>
 
                             {/* Deliverables */}

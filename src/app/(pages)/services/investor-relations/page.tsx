@@ -30,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Investor Relations",
     subtitle =
-    "Capital follows confidence — and confidence follows clarity. Build conviction with narrative-led IR.",
+    "Clear investor communication. Strong stories. Confidence that lasts.",
     tags = [
         "Investor Perception",
         "Fundraising Support",
@@ -45,9 +45,9 @@ export default function ServiceDetailPage({
     ],
     heroMedia = {
         image1: "img11.png",
-        image2: "img9.jpg",
+        image2: "img9.webp",
         video: SERVICE_VIDEO_URLS["investor-relations"],
-        videoPoster: "img9.jpg",
+        videoPoster: "img9.webp",
     },
 }: Props) {
     const deliverables = [
@@ -230,11 +230,11 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                Capital follows confidence — and confidence follows clarity. Bond & Vale
-                                shapes investor perception through narrative-driven IR advisory, blending
-                                capital markets insight with deep communications expertise. We support
-                                fundraising cycles, financial communications, and long-term investor visibility.
-                                Investors don’t just buy performance. They buy conviction.
+                                Investors back companies they understand and trust. Bond & Vale
+                                helps you communicate clearly with the market through fundraising
+                                support, financial communications, and ongoing investor relations.
+                                We combine capital markets experience with strong communications
+                                so your story holds up when it counts.
                             </p>
 
                             {/* Deliverables */}

@@ -62,11 +62,10 @@ export default async function HomePage() {
                     </div>
 
                     <ProjectsFeatureSection
-                        leftImage="/img17.png"
-                        rightTopImage="/img3.png"
+                        leftImage="/img17.webp"
+                        rightTopImage="/img3.webp"
                         title={"Strategic PR & Marketing for Exceptional Brand Growth"}
-                        body="We’re not a firm that simply accepts change as inevitable — we embrace it. We shape the narrative, putting you firmly in control. This evolution of our identity makes that clear. It’s more than a new look or rebrand; it’s a declaration of who we are and what we stand for. A commitment to move forward — always — alongside our clients.
-We are Bond and Vale. Redefining Influence."
+                        body="We do not treat change as something to accept passively. We help you shape the story and stay in control. This site reflects who we are today: a pay-on-success PR firm focused on strong media relationships and work that moves your business forward."
                         buttonHref="/services"
                         buttonLabel="Services"
                     />

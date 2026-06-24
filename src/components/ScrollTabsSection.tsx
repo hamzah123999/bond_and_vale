@@ -197,15 +197,15 @@ export default function ScrollSnapTabs() {
         () => [
             {
                 title: "PAY ON SUCCESS",
-                body: "OUR PAY-ON-SUCCESS MODEL REDEFINES VALUE IN COMMUNICATIONS. NO UPFRONT FEES, NO COMMITMENT AND NO RETAINERS. THIS TRANSPARENT, RESULTS-DRIVEN APPROACH REFLECTS OUR ACCOUNTABILITY, INTEGRITY, AND COMMITMENT TO MEASURABLE SUCCESS THAT STRENGTHENS EVERY PARTNERSHIP.",
+                body: "OUR PAY-ON-SUCCESS MODEL MEANS NO UPFRONT FEES, NO RETAINERS, AND NO LONG CONTRACTS. YOU PAY WHEN WE DELIVER. THAT KEEPS US ACCOUNTABLE AND KEEPS THE FOCUS ON RESULTS.",
             },
             {
                 title: "TRANSPARENCY & TRUST",
-                body: "WE OPERATE WITH TRANSPARENCY. EVERY STRATEGY, MILESTONE AND METRIC IS SHARED OPENLY. THROUGH DATA-LED COMMUNICATION AND HONEST COLLABORATION, WE BUILD THE TRUST AND CREDIBILITY THAT DEFINE LASTING CLIENT RELATIONSHIPS.",
+                body: "WE SHARE STRATEGY, PROGRESS, AND OUTCOMES OPENLY. CLEAR COMMUNICATION BUILDS TRUST, AND TRUST BUILDS STRONG CLIENT RELATIONSHIPS.",
             },
             {
                 title: "NETWORK AND INFLUENCE",
-                body: "WITH A GLOBAL NETWORK OF MEDIA, INVESTORS AND INDUSTRY LEADERS, WE HELP BRANDS AMPLIFY AUTHORITY AND REDEFINE INFLUENCE. OUR RELATIONSHIPS AND STRATEGIC STORYTELLING TURN REPUTATION INTO MEASURABLE VISIBILITY AND INFLUENCE THAT ENDURES.",
+                body: "OUR NETWORK SPANS MEDIA, INVESTORS, AND INDUSTRY LEADERS. WE USE THOSE RELATIONSHIPS TO HELP CLIENTS EARN VISIBILITY, CREDIBILITY, AND LASTING INFLUENCE.",
             },
         ],
         []
@@ -214,19 +214,19 @@ export default function ScrollSnapTabs() {
     const media = useMemo<MediaItem[]>(
         () => [
             {
-                image: { src: "/img19.jpg", alt: "Image 1" },
+                image: { src: "/img19.webp", alt: "Image 1" },
                 video: {
                     src: cloudinaryVideo(SCROLL_TAB_VIDEOS[0], { width: VIDEO_WIDTH.scrollTab }),
                 },
             },
             {
-                image: { src: "/img18.jpg", alt: "Image 18" },
+                image: { src: "/img18.webp", alt: "Image 18" },
                 video: {
                     src: cloudinaryVideo(SCROLL_TAB_VIDEOS[1], { width: VIDEO_WIDTH.scrollTab }),
                 },
             },
             {
-                image: { src: "/img20.jpg", alt: "Image 3" },
+                image: { src: "/img20.webp", alt: "Image 3" },
                 video: {
                     src: cloudinaryVideo(SCROLL_TAB_VIDEOS[2], { width: VIDEO_WIDTH.scrollTab }),
                 },

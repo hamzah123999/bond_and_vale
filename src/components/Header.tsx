@@ -367,7 +367,7 @@ export default function Header() {
                 <div className="flex flex-col items-center gap-[clamp(1rem,2.5vh,2rem)]">
                   <div className="menu-img w-full max-w-[min(380px,70vw)]">
                     <Image
-                      src="/img17.png"
+                      src="/img17.webp"
                       width={500}
                       height={500}
                       loading="lazy"

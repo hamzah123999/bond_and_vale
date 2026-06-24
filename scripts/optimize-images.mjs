@@ -25,6 +25,18 @@ const jobs = [
         width: 900,
         quality: 85,
     })),
+    { input: "public/img9.jpg", output: "public/img9.webp", width: 1200, quality: 82 },
+    { input: "public/img15.png", output: "public/img15.webp", width: 1200, quality: 85 },
+    { input: "public/img17.png", output: "public/img17.webp", width: 1200, quality: 85 },
+    { input: "public/img3.png", output: "public/img3.webp", width: 1200, quality: 85 },
+    { input: "public/img12.png", output: "public/img12.webp", width: 1200, quality: 85 },
+    { input: "public/img18.jpg", output: "public/img18.webp", width: 900, quality: 82 },
+    { input: "public/img19.jpg", output: "public/img19.webp", width: 900, quality: 82 },
+    { input: "public/img20.jpg", output: "public/img20.webp", width: 900, quality: 82 },
+    { input: "public/img7.jpg", output: "public/img7.webp", width: 1200, quality: 82 },
+    { input: "public/img4.jpg", output: "public/img4.webp", width: 1200, quality: 82 },
+    { input: "public/img5.jpg", output: "public/img5.webp", width: 900, quality: 82 },
+    { input: "public/img6.jpg", output: "public/img6.webp", width: 900, quality: 82 },
 ];
 
 function fmt(bytes) {

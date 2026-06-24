@@ -9,7 +9,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
     title: "Blog & News",
     description:
-        "Insights on branding, public relations, and strategic communication from Bond & Vale — practical guidance for building reputation and long-term brand value.",
+        "Insights on branding, public relations, and communication from Bond & Vale. Practical guidance on reputation, media, and brand growth.",
     alternates: {
         canonical: "/blog",
     },

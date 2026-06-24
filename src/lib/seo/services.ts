@@ -11,7 +11,7 @@ export const SERVICE_PAGES = [
 
 const descriptions: Record<string, string> = {
     "public-relations":
-        "Strategic public relations with tier-1 media placements, editorial authority, and Bond & Vale's pay-on-success model.",
+        "Public relations with top-tier media coverage and Bond & Vale's pay-on-success model.",
     "brand-consultancy":
         "Brand strategy, positioning, and messaging consultancy to build brands with clarity and long-term value.",
     "reputation-management":
@@ -19,7 +19,7 @@ const descriptions: Record<string, string> = {
     "website-development":
         "Modern, conversion-focused website development for brands that need speed, clarity, and credibility online.",
     "digital-marketing":
-        "Performance-driven digital marketing combining creative campaigns with measurable brand growth.",
+        "Performance-focused digital marketing with creative campaigns and clear results.",
     "investor-relations":
         "Clear investor communications and strategic storytelling for companies building market confidence.",
 };

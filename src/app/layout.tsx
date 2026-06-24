@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Bond & Vale – Strategic PR & Communications",
+        alt: "Bond & Vale, Strategic PR and Communications",
       },
     ],
     locale: "en_US",
@@ -67,10 +67,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
-      { url: "/favicon-v2.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [
-      { url: "/favicon-v2.png", sizes: "192x192" },
+      { url: "/favicon-192.png", sizes: "192x192" },
     ],
   },
 

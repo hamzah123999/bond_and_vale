@@ -8,7 +8,7 @@ import React from 'react'
 export const metadata: Metadata = {
     title: "Our Services",
     description:
-        "Explore Bond & Vale's integrated communications services — public relations, brand consultancy, reputation management, digital marketing, and more.",
+        "Explore Bond & Vale's services: public relations, brand consultancy, reputation management, digital marketing, and more.",
     alternates: {
         canonical: "/services",
     },
