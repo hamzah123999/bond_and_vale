@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import TabLoader from "@/components/Loader";
 import Wrapper from "@/app/Wrapper";
 import HeroClient from "@/components/HeroClient";
 import DoorRevealSectionComp from "@/components/DoorRevealSectionComp";
@@ -44,7 +43,6 @@ export default function HomePage() {
     return (
         <Wrapper>
             <div className="bg-[#e0d1be] min-h-screen">
-                <TabLoader />
 
                 <HeroClient />
 

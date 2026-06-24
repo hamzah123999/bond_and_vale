@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
-import TabLoader from "@/components/Loader";
 
 type Props = {
     title?: string;
@@ -80,7 +79,6 @@ export default function ServiceDetailPage({
 
     return (
         <Wrapper>
-            <TabLoader />
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
 

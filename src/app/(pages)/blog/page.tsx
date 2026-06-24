@@ -6,7 +6,6 @@ import axios from "axios";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
 import DecryptedText from "@/components/DecryptedText";
-import TabLoader from "@/components/Loader";
 
 type BlogDoc = {
     _id: string;
@@ -61,7 +60,6 @@ export default function Blog() {
 
     return (
         <Wrapper>
-            <TabLoader  />
             <section className="bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 

@@ -191,4 +191,5 @@ html:has(#initial-site-loader) body {
 
 .tabloader-hide {
   transform: translateY(-100%);
+  pointer-events: none;
 }

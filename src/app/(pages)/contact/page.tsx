@@ -9,7 +9,6 @@ import Link from "next/link";
 import Script from "next/script";
 import axios from "axios";
 import { toast } from "sonner";
-import TabLoader from "@/components/Loader";
 
 const EmailBlock = memo(function EmailBlock() {
     return (
@@ -193,7 +192,6 @@ const CalendlySection = memo(function CalendlySection() {
 export default function Contact() {
     return (
         <Wrapper>
-            <TabLoader />
             <div className="bg-[#e0d1be] min-h-screen">
                 <Header />
 

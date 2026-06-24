@@ -7,7 +7,6 @@ import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import TabLoader from "@/components/Loader";
 import { toast } from "sonner";
 
 export default function AdminLoginPage() {
@@ -106,7 +105,6 @@ export default function AdminLoginPage() {
 
     return (
         <Wrapper>
-            <TabLoader />
             <main className="min-h-screen bg-[#e0d1be] text-[#0e221c]">
                 <Header />
 

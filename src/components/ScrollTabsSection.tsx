@@ -281,7 +281,7 @@ export default function ScrollSnapTabs() {
             className="relative w-full"
             style={{ height: `${sectionHeightVh}vh` }}
         >
-            <div className="sticky top-0 h-screen w-full overflow-hidden">
+            <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none">
                 <div className="relative h-full w-full flex items-center max-w-7xl mx-auto overflow-x-hidden justify-center">
                     <div
                         ref={clipRef}

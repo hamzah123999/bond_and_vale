@@ -17,7 +17,6 @@ import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
-import TabLoader from "@/components/Loader";
 
 type InquiryDoc = {
     _id: string;
@@ -137,7 +136,6 @@ export default function AdminDashboard() {
 
     return (
         <main className="min-h-screen bg-[#e0d1be] text-[#23352d]">
-            <TabLoader />
             <Header />
 
             <section className="mx-auto max-w-[1450px] px-4 lg:px-14 pt-14 lg:pt-20 pb-24">

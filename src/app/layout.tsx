@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import SiteLoader from "@/components/SiteLoader";
 // import "lenis/dist/lenis.css";
 
 const inter = Inter({
@@ -97,7 +98,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.style.overflow='hidden';`,
+            __html: `(function(){try{var seen=sessionStorage.getItem('bond-vale-loader-seen')==='1';if(seen){document.documentElement.style.overflow='';var el=document.getElementById('initial-site-loader');if(el)el.remove();}else{document.documentElement.style.overflow='hidden';}}catch(e){}})();`,
           }}
         />
       </head>
@@ -116,6 +117,7 @@ export default function RootLayout({
             className="w-[260px] sm:w-[360px] h-auto px-6"
           />
         </div>
+        <SiteLoader />
         {children}
         <Toaster />
       </body>
