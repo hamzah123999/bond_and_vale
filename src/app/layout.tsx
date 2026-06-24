@@ -94,8 +94,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.style.overflow='hidden';`,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} antialiased`}>
+        <div
+          id="initial-site-loader"
+          aria-hidden="true"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#0e221c] tabloader"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/loaderlogo.svg"
+            alt=""
+            width={420}
+            height={120}
+            className="w-[260px] sm:w-[360px] h-auto px-6"
+          />
+        </div>
         {children}
         <Toaster />
       </body>

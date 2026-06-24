@@ -179,6 +179,10 @@ body {
   background: #ab8b64 !important;
 }
 
+html:has(#initial-site-loader) body {
+  overflow: hidden;
+}
+
 .tabloader {
   transform: translateY(0);
   transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
