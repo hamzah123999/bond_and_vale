@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FadeUp from "@/components/FadeUp";
+import { cloudinaryVideo, VIDEO_WIDTH } from "@/lib/cloudinary";
 
 type ServiceCardProps = {
     href?: string;
@@ -24,9 +25,11 @@ export default function ServiceCard({
 }: ServiceCardProps) {
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [hovered, setHovered] = useState(false);
+    const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
 
     const onEnter = async () => {
         setHovered(true);
+        setShouldLoadVideo(true);
         const v = videoRef.current;
         if (!v) return;
         try {
@@ -77,11 +80,15 @@ export default function ServiceCard({
                         "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
                         hovered ? "opacity-100" : "opacity-0",
                     ].join(" ")}
-                    src={videoSrc}
+                    src={
+                        shouldLoadVideo
+                            ? cloudinaryVideo(videoSrc, { width: VIDEO_WIDTH.card })
+                            : undefined
+                    }
                     muted
                     playsInline
                     loop
-                    preload="metadata"
+                    preload="none"
                 />
 
                 {/* subtle overlay (matches your vibe) */}

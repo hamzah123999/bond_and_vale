@@ -13,7 +13,7 @@ import { toast } from "sonner";
 
 const instaItems = [
     { src: "/img3.png", label: "Editorial" },
-    { src: "/img10.jpg", label: "Workspace" },
+    { src: "/img10.webp", label: "Workspace" },
     { src: "/img5.jpg", label: "Business" },
     { src: "/img6.jpg", label: "Strategy" },
     { src: "/img7.jpg", label: "Branding" },

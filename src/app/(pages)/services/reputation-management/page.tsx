@@ -2,8 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
+import JsonLd from "@/components/JsonLd";
+import OptimizedVideo from "@/components/OptimizedVideo";
+import { serviceJsonLd } from "@/lib/seo/jsonld";
+import { getServiceDescription, serviceMetadata } from "@/lib/seo/services";
+import { SERVICE_VIDEO_URLS } from "@/lib/media/service-videos";
+import { VIDEO_WIDTH } from "@/lib/cloudinary";
+
+export const metadata: Metadata = serviceMetadata("reputation-management");
 
 type Props = {
     title?: string;
@@ -37,8 +46,7 @@ export default function ServiceDetailPage({
     heroMedia = {
         image1: "img13.png",
         image2: "img5.jpg",
-        video:
-            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567960/Video_Reputation_Management_evuc5j.mp4",
+        video: SERVICE_VIDEO_URLS["reputation-management"],
         videoPoster: "img5.jpg",
     },
 }: Props) {
@@ -78,6 +86,14 @@ export default function ServiceDetailPage({
     ];
 
     return (
+        <>
+            <JsonLd
+                data={serviceJsonLd(
+                    "reputation-management",
+                    "Reputation Management",
+                    getServiceDescription("reputation-management"),
+                )}
+            />
         <Wrapper>
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
@@ -171,15 +187,15 @@ export default function ServiceDetailPage({
                         {/* Video (center / big) */}
                         <div className="lg:col-span-4 overflow-hidden border border-black/10 bg-black/5">
                             <div className="relative aspect-[16/10] h-full w-full">
-                                <video
+                                <OptimizedVideo
                                     className="h-full w-full object-cover"
-                                    src={"https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567960/Video_Reputation_Management_evuc5j.mp4"}
+                                    src={heroMedia.video}
+                                    width={VIDEO_WIDTH.hero}
                                     poster={`/${heroMedia.videoPoster}`}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
                                 />
                                 <div className="pointer-events-none absolute inset-0 bg-black/10" />
                             </div>
@@ -283,5 +299,6 @@ export default function ServiceDetailPage({
                 </section>
             </main>
         </Wrapper>
+        </>
     );
 }

@@ -3,6 +3,10 @@ import Wrapper from "@/app/Wrapper";
 import HeroClient from "@/components/HeroClient";
 import DoorRevealSectionComp from "@/components/DoorRevealSectionComp";
 import ShufflingCards from "@/components/ShufflingCards";
+import JsonLd from "@/components/JsonLd";
+import { getPublishedPosts } from "@/lib/blog-server";
+import { organizationJsonLd } from "@/lib/seo/jsonld";
+import { SERVICE_CARDS } from "@/lib/media/service-videos";
 
 const ScrollTabsSectionComp = dynamic(
     () => import("@/components/ScrollTabsSectionComp"),
@@ -39,106 +43,56 @@ const BlogSection = dynamic(
     { loading: () => <div className="h-64" aria-hidden /> }
 );
 
-export default function HomePage() {
+export default async function HomePage() {
+    const recentPosts = await getPublishedPosts(3);
+
     return (
-        <Wrapper>
-            <div className="bg-[#e0d1be] min-h-screen">
+        <>
+            <JsonLd data={organizationJsonLd()} />
+            <Wrapper>
+                <div className="bg-[#e0d1be] min-h-screen">
+                    <HeroClient />
 
-                <HeroClient />
+                    <DoorRevealSectionComp />
 
-                <DoorRevealSectionComp />
+                    <ShufflingCards />
 
-                <ShufflingCards />
+                    <div>
+                        <ScrollTabsSectionComp />
+                    </div>
 
-                <div>
-                    <ScrollTabsSectionComp />
-                </div>
-
-                <ProjectsFeatureSection
-                    leftImage="/img17.png"
-                    rightTopImage="/img3.png"
-                    title={"Strategic PR & Marketing for Exceptional Brand Growth"}
-                    body="We’re not a firm that simply accepts change as inevitable — we embrace it. We shape the narrative, putting you firmly in control. This evolution of our identity makes that clear. It’s more than a new look or rebrand; it’s a declaration of who we are and what we stand for. A commitment to move forward — always — alongside our clients.
+                    <ProjectsFeatureSection
+                        leftImage="/img17.png"
+                        rightTopImage="/img3.png"
+                        title={"Strategic PR & Marketing for Exceptional Brand Growth"}
+                        body="We’re not a firm that simply accepts change as inevitable — we embrace it. We shape the narrative, putting you firmly in control. This evolution of our identity makes that clear. It’s more than a new look or rebrand; it’s a declaration of who we are and what we stand for. A commitment to move forward — always — alongside our clients.
 We are Bond and Vale. Redefining Influence."
-                    buttonHref="/services"
-                    buttonLabel="Services"
-                />
+                        buttonHref="/services"
+                        buttonLabel="Services"
+                    />
 
-                <div className="py-10 bg-[#e6d7c4]">
-                    <FlowingMenuComp />
-                </div>
+                    <div className="py-10 bg-[#e6d7c4]">
+                        <FlowingMenuComp />
+                    </div>
 
-                <ServicesSection
-                    services={[
-                        {
-                            title: "Public Relations",
-                            imageSrc: "/services/PublicRelations.png",
-                            videoSrc:
-                                "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567969/Video_Public_Relations_pw3b0q.mp4",
-                            tag: "Service",
-                            description: "Media outreach & brand positioning.",
-                            href: "/public-relations",
-                        },
-                        {
-                            title: "Brand Consultancy",
-                            imageSrc: "/services/BrandConsultancy.png",
-                            videoSrc:
-                                "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568016/Video_Brand_Consultancy_Fix_hmd5d0.mp4",
-                            tag: "Service",
-                            description: "Identity, strategy & messaging.",
-                            href: "/brand-consultancy",
-                        },
-                        {
-                            title: "Reputation Management",
-                            imageSrc: "/services/ReputationManagement.png",
-                            videoSrc:
-                                "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567960/Video_Reputation_Management_evuc5j.mp4",
-                            tag: "Service",
-                            description: "Protect and strengthen trust.",
-                            href: "/reputation-management",
-                        },
-                        {
-                            title: "Website Development",
-                            imageSrc: "/services/WebsiteDevelopment.png",
-                            videoSrc:
-                                "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567951/Video_Website_Development_p0yssr.mp4",
-                            tag: "Service",
-                            description: "Modern, fast conversion websites.",
-                            href: "/website-development",
-                        },
-                        {
-                            title: "Digital Marketing",
-                            imageSrc: "/services/DigitalMarketing.png",
-                            videoSrc:
-                                "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568007/Video_Digital_Marketing_b4te6a.mp4",
-                            tag: "Service",
-                            description: "Performance + creative campaigns.",
-                            href: "/digital-marketing",
-                        },
-                        {
-                            title: "Investor Relations",
-                            imageSrc: "/services/InvestorRelations.png",
-                            videoSrc:
-                                "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567979/Video_Investor_Relations_wffyxy.mp4",
-                            tag: "Service",
-                            description: "Clear communication for investors.",
-                            href: "/investor-relations",
-                        },
-                    ]}
-                />
+                    <ServicesSection services={SERVICE_CARDS} />
 
-                <ExpandingHero
-                    imageSrc="/bg.png"
-                    quote='"We shape brands with clarity,
+                    <ExpandingHero
+                        imageSrc="/bg.webp"
+                        quote='"We shape brands with clarity,
 strategy, and long-term value."'
-                />
+                    />
 
-                <div className="overflow-x-hidden">
-                    <TestimonialsSlider />
+                    <div className="overflow-x-hidden">
+                        <TestimonialsSlider />
+                    </div>
+
+                    <BlogSection
+                        intro="Discover the latest trends, tips, and inspiration. Stay up-to-date on our latest projects and insights."
+                        posts={recentPosts}
+                    />
                 </div>
-
-                <BlogSection intro="Discover the latest trends, tips, and inspiration. Stay up-to-date on our latest projects and insights." />
-            </div>
-        </Wrapper>
+            </Wrapper>
+        </>
     );
 }

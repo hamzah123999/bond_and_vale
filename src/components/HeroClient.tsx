@@ -3,6 +3,8 @@
 import TicketButton from "@/components/TicketButton";
 import SplitText from "@/components/SplitText";
 import Header from "@/components/Header";
+import { cloudinaryVideo, VIDEO_WIDTH } from "@/lib/cloudinary";
+import { HERO_BACKGROUND_VIDEOS } from "@/lib/media/service-videos";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function HeroClient() {
@@ -48,11 +50,17 @@ export default function HeroClient() {
     }, []);
 
     const videoSrc = useMemo(() => {
-        if (isDesktop === true)
-            return "https://res.cloudinary.com/dpkp4hymz/video/upload/f_auto,q_auto,w_1280/v1768445682/videobg_d0ta23_1_goxitj.mp4";
-        if (isDesktop === false)
-            return "https://res.cloudinary.com/dpkp4hymz/video/upload/f_auto,q_auto,w_720/v1768445684/mobile_ttipba_1_b0fiko.mp4";
-        return null; // unknown on first render
+        if (isDesktop === true) {
+            return cloudinaryVideo(HERO_BACKGROUND_VIDEOS.desktop, {
+                width: VIDEO_WIDTH.heroDesktop,
+            });
+        }
+        if (isDesktop === false) {
+            return cloudinaryVideo(HERO_BACKGROUND_VIDEOS.mobile, {
+                width: VIDEO_WIDTH.heroMobile,
+            });
+        }
+        return null;
     }, [isDesktop]);
 
     return (

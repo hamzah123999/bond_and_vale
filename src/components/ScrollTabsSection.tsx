@@ -8,6 +8,8 @@ import {
     useTransform,
     type MotionValue,
 } from "framer-motion";
+import { cloudinaryVideo, VIDEO_WIDTH } from "@/lib/cloudinary";
+import { SCROLL_TAB_VIDEOS } from "@/lib/media/service-videos";
 
 type Item = { title: string; body: string };
 type MediaItem = {
@@ -115,6 +117,7 @@ function MediaTile({
     flexGrow: MotionValue<number>;
 }) {
     const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [shouldLoadVideo, setShouldLoadVideo] = useState(idx === 0);
     const videoOpacity = useTransform(activeIndex, (a) => (a === idx ? 1 : 0));
     const imageOpacity = useTransform(activeIndex, (a) => (a === idx ? 0 : 1));
 
@@ -123,6 +126,7 @@ function MediaTile({
         if (!video) return;
 
         if (Math.round(a) === idx) {
+            setShouldLoadVideo(true);
             void video.play().catch(() => {});
         } else {
             video.pause();
@@ -134,11 +138,12 @@ function MediaTile({
             <div className="relative w-full h-[200px] md:h-[300px] lg:h-[320px] overflow-hidden">
                 <motion.video
                     ref={videoRef}
-                    src={media.video.src}
+                    src={shouldLoadVideo ? media.video.src : undefined}
                     muted
                     playsInline
                     loop
                     autoPlay
+                    preload="none"
                     className="absolute inset-0 h-full w-full object-cover"
                     style={{ opacity: videoOpacity }}
                 />
@@ -211,19 +216,19 @@ export default function ScrollSnapTabs() {
             {
                 image: { src: "/img19.jpg", alt: "Image 1" },
                 video: {
-                    src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627767/1_aazqv1.webm",
+                    src: cloudinaryVideo(SCROLL_TAB_VIDEOS[0], { width: VIDEO_WIDTH.scrollTab }),
                 },
             },
             {
                 image: { src: "/img18.jpg", alt: "Image 18" },
                 video: {
-                    src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627812/3_ypaw6r.webm",
+                    src: cloudinaryVideo(SCROLL_TAB_VIDEOS[1], { width: VIDEO_WIDTH.scrollTab }),
                 },
             },
             {
                 image: { src: "/img20.jpg", alt: "Image 3" },
                 video: {
-                    src: "https://res.cloudinary.com/dpkp4hymz/video/upload/v1766627775/2_wmylkg.webm",
+                    src: cloudinaryVideo(SCROLL_TAB_VIDEOS[2], { width: VIDEO_WIDTH.scrollTab }),
                 },
             },
         ],
