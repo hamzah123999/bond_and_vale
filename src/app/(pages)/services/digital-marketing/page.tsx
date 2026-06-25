@@ -2,9 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
-import TabLoader from "@/components/Loader";
+import JsonLd from "@/components/JsonLd";
+import OptimizedVideo from "@/components/OptimizedVideo";
+import { serviceJsonLd } from "@/lib/seo/jsonld";
+import { getServiceDescription, serviceMetadata } from "@/lib/seo/services";
+import { SERVICE_VIDEO_URLS } from "@/lib/media/service-videos";
+import { VIDEO_WIDTH } from "@/lib/cloudinary";
+
+export const metadata: Metadata = serviceMetadata("digital-marketing");
 
 type Props = {
     title?: string;
@@ -22,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Digital Marketing",
     subtitle =
-    "Narrative-led systems that build trust — and move audiences from awareness to action.",
+    "Marketing built on clear stories, trust, and measurable action.",
     tags = [
         "Narrative Systems",
         "Strategy-Led",
@@ -36,11 +44,10 @@ export default function ServiceDetailPage({
         { label: "Approach", value: "Integrated" },
     ],
     heroMedia = {
-        image1: "img4.jpg",
-        image2: "img10.jpg",
-        video:
-            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568007/Video_Digital_Marketing_b4te6a.mp4",
-        videoPoster: "img10.jpg",
+        image1: "img4.webp",
+        image2: "img10.webp",
+        video: SERVICE_VIDEO_URLS["digital-marketing"],
+        videoPoster: "img10.webp",
     },
 }: Props) {
     const deliverables = [
@@ -55,7 +62,7 @@ export default function ServiceDetailPage({
     const process = [
         {
             title: "Discover",
-            body: "Align goals, audience, and landscape.",
+            body: "Align goals, audience, and market context.",
         },
         {
             title: "Shape the Story",
@@ -80,8 +87,15 @@ export default function ServiceDetailPage({
     ];
 
     return (
+        <>
+            <JsonLd
+                data={serviceJsonLd(
+                    "digital-marketing",
+                    "Digital Marketing",
+                    getServiceDescription("digital-marketing"),
+                )}
+            />
         <Wrapper>
-            <TabLoader />
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
 
@@ -174,15 +188,15 @@ export default function ServiceDetailPage({
                         {/* Video (center / big) */}
                         <div className="lg:col-span-4 overflow-hidden border border-black/10 bg-black/5">
                             <div className="relative aspect-[16/10] h-full w-full">
-                                <video
+                                <OptimizedVideo
                                     className="h-full w-full object-cover"
-                                    src={"https://res.cloudinary.com/dpkp4hymz/video/upload/v1769568007/Video_Digital_Marketing_b4te6a.mp4"}
+                                    src={heroMedia.video}
+                                    width={VIDEO_WIDTH.hero}
                                     poster={`/${heroMedia.videoPoster}`}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
                                 />
                                 <div className="pointer-events-none absolute inset-0 bg-black/10" />
                             </div>
@@ -217,12 +231,11 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                In a noisy digital landscape, performance is no longer about volume —
-                                it is about clarity, story, and intelligence. Bond & Vale creates
-                                narrative-led marketing systems that build trust and move audiences
-                                from awareness to action. We focus on influence, not impressions.
-                                Our engagements are selective, senior-led, and integrated across the
-                                full communications ecosystem.
+                                Digital marketing works when the message is clear and the strategy
+                                is sound. Bond & Vale builds campaigns that earn trust and move
+                                people from awareness to action. We care about influence, not empty
+                                impressions. Our work is senior-led, selective, and connected to
+                                the rest of your communications.
                             </p>
 
                             {/* Deliverables */}
@@ -284,5 +297,6 @@ export default function ServiceDetailPage({
                 </section>
             </main>
         </Wrapper>
+        </>
     );
 }

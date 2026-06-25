@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-// import "aos/dist/aos.css";
+import SiteLoader from "@/components/SiteLoader";
 // import "lenis/dist/lenis.css";
 
 const inter = Inter({
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Bond & Vale – Strategic PR & Communications",
+        alt: "Bond & Vale, Strategic PR and Communications",
       },
     ],
     locale: "en_US",
@@ -67,10 +67,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
-      { url: "/favicon-v2.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [
-      { url: "/favicon-v2.png", sizes: "192x192" },
+      { url: "/favicon-192.png", sizes: "192x192" },
     ],
   },
 
@@ -94,8 +94,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var seen=sessionStorage.getItem('bond-vale-loader-seen')==='1';if(seen){document.documentElement.style.overflow='';var el=document.getElementById('initial-site-loader');if(el)el.remove();}else{document.documentElement.style.overflow='hidden';}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} antialiased`}>
+        <div
+          id="initial-site-loader"
+          aria-hidden="true"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#0e221c] tabloader"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/loaderlogo.svg"
+            alt=""
+            width={420}
+            height={120}
+            className="w-[260px] sm:w-[360px] h-auto px-6"
+          />
+        </div>
+        <SiteLoader />
         {children}
         <Toaster />
       </body>

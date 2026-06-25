@@ -3,6 +3,8 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import FadeUp from "@/components/FadeUp";
+import { cloudinaryVideo, VIDEO_WIDTH } from "@/lib/cloudinary";
 
 type ServiceCardProps = {
     href?: string;
@@ -22,36 +24,42 @@ export default function ServiceCard({
     videoSrc,
 }: ServiceCardProps) {
     const videoRef = useRef<HTMLVideoElement | null>(null);
-    const [hovered, setHovered] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
+    const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+    const [videoReady, setVideoReady] = useState(false);
 
-    const onEnter = async () => {
-        setHovered(true);
-        const v = videoRef.current;
-        if (!v) return;
-        try {
-            v.currentTime = 0;
-            await v.play();
-        } catch {
-            // autoplay might fail in some browsers if not muted (we mute below)
-        }
+    const showVideo = isHovering && videoReady;
+
+    const onEnter = () => {
+        setIsHovering(true);
+        setShouldLoadVideo(true);
     };
 
     const onLeave = () => {
-        setHovered(false);
+        setIsHovering(false);
         const v = videoRef.current;
         if (!v) return;
         v.pause();
         v.currentTime = 0;
     };
 
+    const onVideoReady = () => {
+        setVideoReady(true);
+        const v = videoRef.current;
+        if (!v || !isHovering) return;
+        void v.play().catch(() => {});
+    };
+
+    const servicePath = `/services/${href.replace(/^\//, "")}`;
+
     return (
+        <FadeUp>
         <Link
-            href={`/services/${href}`}
+            href={servicePath}
             onMouseEnter={onEnter}
             onMouseLeave={onLeave}
             onFocus={onEnter}
             onBlur={onLeave}
-            data-aos="fade-up"
             className="group block border border-black/25 bg-transparent"
         >
             {/* Media */}
@@ -62,7 +70,7 @@ export default function ServiceCard({
                     alt={title}
                     className={[
                         "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-                        hovered ? "opacity-0" : "opacity-100",
+                        showVideo ? "opacity-0" : "opacity-100",
                     ].join(" ")}
                     loading="lazy"
                 />
@@ -72,13 +80,19 @@ export default function ServiceCard({
                     ref={videoRef}
                     className={[
                         "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-                        hovered ? "opacity-100" : "opacity-0",
+                        showVideo ? "opacity-100" : "opacity-0",
                     ].join(" ")}
-                    src={videoSrc}
+                    src={
+                        shouldLoadVideo
+                            ? cloudinaryVideo(videoSrc, { width: VIDEO_WIDTH.card })
+                            : undefined
+                    }
                     muted
                     playsInline
                     loop
-                    preload="metadata"
+                    preload="none"
+                    onLoadedData={onVideoReady}
+                    onCanPlay={onVideoReady}
                 />
 
                 {/* subtle overlay (matches your vibe) */}
@@ -101,5 +115,6 @@ export default function ServiceCard({
                 </div>
             </div>
         </Link>
+        </FadeUp>
     );
 }

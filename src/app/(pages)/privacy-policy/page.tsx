@@ -1,12 +1,10 @@
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
-import TabLoader from "@/components/Loader";
 import React from "react";
 
 export default function PrivacyPolicy() {
     return (
         <Wrapper>
-            <TabLoader />
             <section className="bg-[#e0d1be] text-[#0e221c]">
             <Header />
                 <div className="mx-auto max-w-[1100px] px-4 md:px-10 py-16 md:py-24">

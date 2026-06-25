@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import SplitText from "./SplitText";
+import FadeUp from "@/components/FadeUp";
 
 type Testimonial = {
     name: string;
@@ -43,7 +44,7 @@ const testimonials = [
 export default function TestimonialsSlider({
     label = "Testimonials",
     title = "WHAT CLIENT SAYS\nABOUT BOND & VALE",
-    subtitle = `Discover how our strategic PR and marketing solutions have transformed brands\nworldwide. Hear from our satisfied clients!`,    
+    subtitle = `Read what clients say about working with Bond & Vale on PR, brand, and communications.`,    
     className = "",
 }: {
     label?: string;
@@ -80,12 +81,12 @@ export default function TestimonialsSlider({
                             onLetterAnimationComplete={handleAnimationComplete}
                         />
                     </h2>
-                    <p data-aos="fade-up" className="mx-auto  mt-6 max-w-2xl text-[clamp(0.9rem,1.2vw,1rem)] text-[#0e221c]/70 leading-7 whitespace-pre-line">
+                    <FadeUp className="mx-auto mt-6 max-w-2xl text-[clamp(0.9rem,1.2vw,1rem)] text-[#0e221c]/70 leading-7 whitespace-pre-line">
                         {subtitle}
-                    </p>
+                    </FadeUp>
                 </div>
 
-                <div className="mt-12 lg:mt-16" data-aos="fade -up">
+                <FadeUp className="mt-12 lg:mt-16">
                     <Swiper
                         onSwiper={(s) => (swiperRef.current = s)}
                         onSlideChange={(s) => setActive(s.realIndex)}
@@ -154,7 +155,7 @@ export default function TestimonialsSlider({
                             />
                         ))}
                     </div> */}
-                </div>
+                </FadeUp>
             </div>
         </section>
     );

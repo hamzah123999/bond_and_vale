@@ -2,9 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
-import TabLoader from "@/components/Loader";
+import JsonLd from "@/components/JsonLd";
+import OptimizedVideo from "@/components/OptimizedVideo";
+import { serviceJsonLd } from "@/lib/seo/jsonld";
+import { getServiceDescription, serviceMetadata } from "@/lib/seo/services";
+import { SERVICE_VIDEO_URLS } from "@/lib/media/service-videos";
+import { VIDEO_WIDTH } from "@/lib/cloudinary";
+
+export const metadata: Metadata = serviceMetadata("public-relations");
 
 type Props = {
     title?: string;
@@ -21,7 +29,7 @@ type Props = {
 
 export default function ServiceDetailPage({
     title = "Public Relations",
-    subtitle = "Precision-crafted stories. Tier-1 visibility. Influence with purpose.",
+    subtitle = "Strong stories. Top-tier media. Results that matter.",
     tags = [
         "Pay-on-Success",
         "Tier-1 Media",
@@ -36,13 +44,12 @@ export default function ServiceDetailPage({
     ],
     heroMedia = {
         image1:
-            "img3.png",
+            "img3.webp",
         image2:
-            "img12.png",
-        video:
-            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567969/Video_Public_Relations_pw3b0q.mp4",
+            "img12.webp",
+        video: SERVICE_VIDEO_URLS["public-relations"],
         videoPoster:
-            "img12.png",
+            "img12.webp",
     },
 }: Props) {
     const deliverables = [
@@ -57,7 +64,7 @@ export default function ServiceDetailPage({
     const process = [
         {
             title: "Selection & Alignment",
-            body: "We partner only when we know we can deliver — our success is tied to yours.",
+            body: "We partner only when we know we can deliver. Our success is tied to yours.",
         },
         {
             title: "Narrative Development",
@@ -68,7 +75,7 @@ export default function ServiceDetailPage({
             body: "We secure strategic top-tier coverage that anchors your digital footprint.",
         },
         {
-            title: "Leverage & Expansion",
+            title: "Growth & Visibility",
             body: "We convert earned media into speaking opportunities, podcasts, and long-term visibility.",
         },
         {
@@ -78,8 +85,15 @@ export default function ServiceDetailPage({
     ];
 
     return (
+        <>
+            <JsonLd
+                data={serviceJsonLd(
+                    "public-relations",
+                    "Public Relations",
+                    getServiceDescription("public-relations"),
+                )}
+            />
         <Wrapper>
-            <TabLoader />
 
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
@@ -172,15 +186,15 @@ export default function ServiceDetailPage({
                         {/* Video (center / big) */}
                         <div className="lg:col-span-4 overflow-hidden border border-black/10 bg-black/5">
                             <div className="relative aspect-[16/10] h-full w-full">
-                                <video
+                                <OptimizedVideo
                                     className="h-full w-full object-cover"
-                                    src={"https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567969/Video_Public_Relations_pw3b0q.mp4"}
-                                    poster={`/${heroMedia.videoPoster}}`}
+                                    src={heroMedia.video}
+                                    width={VIDEO_WIDTH.hero}
+                                    poster={`/${heroMedia.videoPoster}`}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
                                 />
                                 <div className="pointer-events-none absolute inset-0 bg-black/10" />
                             </div>
@@ -215,15 +229,13 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                Bond & Vale is a selective communications firm redefining the PR
-                                partnership. Driven by a pay-on-success model, we elevate exceptional
-                                founders and brands into global visibility, securing strategic Tier-1
-                                media placements that build lasting authority. Every engagement is
-                                bespoke. Every story is precision-crafted. Every result has purpose.
-                                Our mission is to transform digital footprints into influence,
-                                unlocking speaking appearances, editorial access, and thought-leadership
-                                opportunities that move business forward. We don’t publicize everyone.
-                                We champion the few worth talking about.
+                                Bond & Vale is a selective PR firm built around pay-on-success.
+                                We work with founders and brands we believe in, securing strong
+                                media coverage that builds real authority. Every engagement is
+                                tailored. Every story is considered. Every result matters.
+                                We turn coverage into speaking slots, podcasts, and long-term
+                                visibility. We do not take every client. We back the ones worth
+                                talking about.
                             </p>
 
                             {/* Deliverables */}
@@ -285,5 +297,6 @@ export default function ServiceDetailPage({
                 </section>
             </main>
         </Wrapper>
+        </>
     );
 }

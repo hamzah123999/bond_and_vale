@@ -4,6 +4,7 @@ import Image from "next/image";
 import TicketButton from "@/components/TicketButton";
 import { ParallaxImage } from "./ParallaxImage";
 import SplitText from "./SplitText";
+import FadeUp from "./FadeUp";
 
 type ProjectsFeatureProps = {
     leftImage: string;
@@ -78,8 +79,7 @@ export default function ProjectsFeatureSection({
                             </div>
 
                             {/* paragraph + button */}
-                            <div className="pl-2" data-aos="fade-up"
->
+                            <FadeUp className="pl-2">
                                 <p className="text-[#0e221c]/80 text-sm">
                                     {body}
                                 </p>
@@ -90,7 +90,7 @@ export default function ProjectsFeatureSection({
                                         label={buttonLabel}
                                     />
                                 </div>
-                            </div>
+                            </FadeUp>
                         </div>
                     </div>
                 </div>

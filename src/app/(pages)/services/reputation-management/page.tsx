@@ -2,9 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
-import TabLoader from "@/components/Loader";
+import JsonLd from "@/components/JsonLd";
+import OptimizedVideo from "@/components/OptimizedVideo";
+import { serviceJsonLd } from "@/lib/seo/jsonld";
+import { getServiceDescription, serviceMetadata } from "@/lib/seo/services";
+import { SERVICE_VIDEO_URLS } from "@/lib/media/service-videos";
+import { VIDEO_WIDTH } from "@/lib/cloudinary";
+
+export const metadata: Metadata = serviceMetadata("reputation-management");
 
 type Props = {
     title?: string;
@@ -22,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Reputation Management",
     subtitle =
-    "Discretion, rigor, and narrative precision — protecting credibility when it matters most.",
+    "Discretion, rigor, and clear messaging. We protect credibility when it matters most.",
     tags = [
         "Crisis Readiness",
         "Narrative Control",
@@ -37,10 +45,9 @@ export default function ServiceDetailPage({
     ],
     heroMedia = {
         image1: "img13.png",
-        image2: "img5.jpg",
-        video:
-            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567960/Video_Reputation_Management_evuc5j.mp4",
-        videoPoster: "img5.jpg",
+        image2: "img5.webp",
+        video: SERVICE_VIDEO_URLS["reputation-management"],
+        videoPoster: "img5.webp",
     },
 }: Props) {
     const deliverables = [
@@ -62,7 +69,7 @@ export default function ServiceDetailPage({
         },
         {
             title: "Build Authority",
-            body: "Leverage Tier-1 placements and thought-leadership.",
+            body: "Use top-tier coverage and thought leadership to strengthen trust.",
         },
         {
             title: "Amplify",
@@ -79,8 +86,15 @@ export default function ServiceDetailPage({
     ];
 
     return (
+        <>
+            <JsonLd
+                data={serviceJsonLd(
+                    "reputation-management",
+                    "Reputation Management",
+                    getServiceDescription("reputation-management"),
+                )}
+            />
         <Wrapper>
-            <TabLoader />
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
 
@@ -173,15 +187,15 @@ export default function ServiceDetailPage({
                         {/* Video (center / big) */}
                         <div className="lg:col-span-4 overflow-hidden border border-black/10 bg-black/5">
                             <div className="relative aspect-[16/10] h-full w-full">
-                                <video
+                                <OptimizedVideo
                                     className="h-full w-full object-cover"
-                                    src={"https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567960/Video_Reputation_Management_evuc5j.mp4"}
+                                    src={heroMedia.video}
+                                    width={VIDEO_WIDTH.hero}
                                     poster={`/${heroMedia.videoPoster}`}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
                                 />
                                 <div className="pointer-events-none absolute inset-0 bg-black/10" />
                             </div>
@@ -216,14 +230,12 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                Reputation is the most valuable asset a leader or company holds —
-                                and the most fragile. Bond & Vale safeguards credibility by
-                                balancing narrative precision with real-world pragmatism. We
-                                operate with the discretion of a private office and the rigor of
-                                a global consultancy. From proactive thought-leadership to
-                                high-stakes stabilization, we build influence structures that
-                                support long-term brand equity. Reputation is not static. We
-                                ensure it works in your favor today and into the future.
+                                Reputation is often a company's most valuable asset, and one of
+                                the easiest to damage. Bond & Vale protects credibility with clear
+                                messaging and practical advice. We work with the discretion of a
+                                private office and the rigor of a global firm. From proactive
+                                thought leadership to high-stakes situations, we help you build
+                                trust that lasts.
                             </p>
 
                             {/* Deliverables */}
@@ -285,5 +297,6 @@ export default function ServiceDetailPage({
                 </section>
             </main>
         </Wrapper>
+        </>
     );
 }

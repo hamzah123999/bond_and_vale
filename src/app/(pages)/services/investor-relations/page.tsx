@@ -2,9 +2,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
-import TabLoader from "@/components/Loader";
+import JsonLd from "@/components/JsonLd";
+import OptimizedVideo from "@/components/OptimizedVideo";
+import { serviceJsonLd } from "@/lib/seo/jsonld";
+import { getServiceDescription, serviceMetadata } from "@/lib/seo/services";
+import { SERVICE_VIDEO_URLS } from "@/lib/media/service-videos";
+import { VIDEO_WIDTH } from "@/lib/cloudinary";
+
+export const metadata: Metadata = serviceMetadata("investor-relations");
 
 type Props = {
     title?: string;
@@ -22,7 +30,7 @@ type Props = {
 export default function ServiceDetailPage({
     title = "Investor Relations",
     subtitle =
-    "Capital follows confidence — and confidence follows clarity. Build conviction with narrative-led IR.",
+    "Clear investor communication. Strong stories. Confidence that lasts.",
     tags = [
         "Investor Perception",
         "Fundraising Support",
@@ -37,10 +45,9 @@ export default function ServiceDetailPage({
     ],
     heroMedia = {
         image1: "img11.png",
-        image2: "img9.jpg",
-        video:
-            "https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567979/Video_Investor_Relations_wffyxy.mp4",
-        videoPoster: "img9.jpg",
+        image2: "img9.webp",
+        video: SERVICE_VIDEO_URLS["investor-relations"],
+        videoPoster: "img9.webp",
     },
 }: Props) {
     const deliverables = [
@@ -79,8 +86,15 @@ export default function ServiceDetailPage({
     ];
 
     return (
+        <>
+            <JsonLd
+                data={serviceJsonLd(
+                    "investor-relations",
+                    "Investor Relations",
+                    getServiceDescription("investor-relations"),
+                )}
+            />
         <Wrapper>
-            <TabLoader />
             <main className="bg-[#e0d1be] text-[#23352d]">
                 <Header />
 
@@ -173,15 +187,15 @@ export default function ServiceDetailPage({
                         {/* Video (center / big) */}
                         <div className="lg:col-span-4 overflow-hidden border border-black/10 bg-black/5">
                             <div className="relative aspect-[16/10] h-full w-full">
-                                <video
+                                <OptimizedVideo
                                     className="h-full w-full object-cover"
-                                    src={"https://res.cloudinary.com/dpkp4hymz/video/upload/v1769567979/Video_Investor_Relations_wffyxy.mp4"}
+                                    src={heroMedia.video}
+                                    width={VIDEO_WIDTH.hero}
                                     poster={`/${heroMedia.videoPoster}`}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata"
                                 />
                                 <div className="pointer-events-none absolute inset-0 bg-black/10" />
                             </div>
@@ -216,11 +230,11 @@ export default function ServiceDetailPage({
                             </h2>
 
                             <p className="mt-5 text-[#23352d]/75 leading-7 max-w-2xl">
-                                Capital follows confidence — and confidence follows clarity. Bond & Vale
-                                shapes investor perception through narrative-driven IR advisory, blending
-                                capital markets insight with deep communications expertise. We support
-                                fundraising cycles, financial communications, and long-term investor visibility.
-                                Investors don’t just buy performance. They buy conviction.
+                                Investors back companies they understand and trust. Bond & Vale
+                                helps you communicate clearly with the market through fundraising
+                                support, financial communications, and ongoing investor relations.
+                                We combine capital markets experience with strong communications
+                                so your story holds up when it counts.
                             </p>
 
                             {/* Deliverables */}
@@ -282,5 +296,6 @@ export default function ServiceDetailPage({
                 </section>
             </main>
         </Wrapper>
+        </>
     );
 }

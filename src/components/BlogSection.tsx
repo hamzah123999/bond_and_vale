@@ -6,38 +6,52 @@ import axios from "axios";
 import TicketButton from "@/components/TicketButton";
 import DecryptedText from "./DecryptedText";
 import SplitText from "./SplitText";
+import FadeUp from "./FadeUp";
 
-type BlogItem = {
+import type { PublicBlogPost } from "@/lib/blog-server";
+
+export type BlogSectionItem = {
     href: string;
     category: string;
     title: string;
     excerpt: string;
 };
 
-type BlogDoc = {
-    _id: string;
-    slug: string;
-    title: string;
-    category: string;
-    excerpt?: string;
-};
+function mapPosts(posts: PublicBlogPost[]): BlogSectionItem[] {
+    return posts.map((p) => ({
+        href: `/blog/${p.slug}`,
+        category: p.category || "Blog",
+        title: p.title,
+        excerpt: (p.excerpt || "").trim() || "Read more",
+    }));
+}
 
 export default function BlogSection({
     title = "BLOGS & NEWS",
     intro,
     buttonHref = "/blog",
     buttonLabel = "All blogs",
+    posts: initialPosts,
 }: {
     title?: string;
     intro: string;
     buttonHref?: string;
     buttonLabel?: string;
+    posts?: PublicBlogPost[];
 }) {
-    const [items, setItems] = useState<BlogItem[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState<BlogSectionItem[]>(() =>
+        initialPosts ? mapPosts(initialPosts) : []
+    );
+    const [loading, setLoading] = useState(initialPosts === undefined);
     const [errMsg, setErrMsg] = useState("");
 
     useEffect(() => {
+        if (initialPosts !== undefined) {
+            setItems(mapPosts(initialPosts));
+            setLoading(false);
+            return;
+        }
+
         const fetchTopBlogs = async () => {
             setLoading(true);
             setErrMsg("");
@@ -46,8 +60,9 @@ export default function BlogSection({
                 const res = await axios.get("/api/blog?status=published&limit=3&page=1");
 
                 if (res.data?.success) {
-                    const posts: BlogDoc[] = res.data.posts || [];
-                    const mapped: BlogItem[] = posts.slice(0, 3).map((p) => ({
+                    const posts: { slug: string; title: string; category: string; excerpt?: string }[] =
+                        res.data.posts || [];
+                    const mapped: BlogSectionItem[] = posts.slice(0, 3).map((p) => ({
                         href: `/blog/${p.slug}`,
                         category: p.category || "Blog",
                         title: p.title,
@@ -68,7 +83,7 @@ export default function BlogSection({
         };
 
         fetchTopBlogs();
-    }, []);
+    }, [initialPosts]);
 
     const handleAnimationComplete = () => { };
 
@@ -91,9 +106,9 @@ export default function BlogSection({
 
                 <div className="mt-10 grid grid-cols-1 lg:grid-cols-[0.9fr_1.6fr] gap-10 lg:gap-16">
                     <div className="flex md:pt-7">
-                        <p data-aos="fade-up" className="max-w-md text-[#0e221c]/70">
+                        <FadeUp className="max-w-md text-[#0e221c]/70">
                             {intro}
-                        </p>
+                        </FadeUp>
                     </div>
 
                     <div className="flex flex-col">
@@ -110,10 +125,9 @@ export default function BlogSection({
                                 </div>
                             ) : (
                                 items.map((item) => (
+                                    <FadeUp key={item.href}>
                                     <Link
-                                        key={item.href}
                                         href={item.href}
-                                        data-aos="fade-up"
                                         className="group grid grid-cols-1 md:items-end md:grid-cols-[1.1fr_1.5fr] gap-3 md:gap-8 py-7"
                                     >
                                         <div>
@@ -138,6 +152,7 @@ export default function BlogSection({
                                             </span>
                                         </div>
                                     </Link>
+                                    </FadeUp>
                                 ))
                             )}
                         </div>
