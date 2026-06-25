@@ -15,6 +15,7 @@ type InquiryDoc = {
     email: string;
     phone?: string;
     message: string;
+    marketingOptIn?: boolean;
     status?: "new" | "read" | "replied"; // if you have it in schema
     source?: string;
     createdAt: string;
@@ -278,6 +279,12 @@ export default function SubmissionsPage() {
                             <div className="flex items-center gap-2">
                                 <Phone className="h-4 w-4 text-[#23352d]/50" />
                                 {active.phone || "—"}
+                            </div>
+                            <div className="text-[#23352d]/70">
+                                Marketing emails:{" "}
+                                <span className="font-medium text-[#23352d]">
+                                    {active.marketingOptIn ? "Opted in" : "No"}
+                                </span>
                             </div>
                         </div>
 

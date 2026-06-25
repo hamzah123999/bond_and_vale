@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
 
-        const { email, phone, message, source, status } = body;
+        const { email, phone, message, source, status, marketingOptIn } = body;
 
         if (!email || !message) {
             return NextResponse.json(
@@ -20,10 +20,14 @@ export async function POST(request: NextRequest) {
         const safeStatus =
             status && ["new", "read", "replied"].includes(status) ? status : undefined;
 
+        const optedIn = Boolean(marketingOptIn);
+
         const contact = await ContactMessage.create({
             email,
             phone: phone ?? "",
             message,
+            marketingOptIn: optedIn,
+            marketingOptInAt: optedIn ? new Date() : null,
             source: source ?? "contact-page", // default if not provided
             status: safeStatus, // if undefined, schema default ("new") will apply
         });

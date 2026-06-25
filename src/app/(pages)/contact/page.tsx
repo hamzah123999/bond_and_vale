@@ -5,6 +5,7 @@ import Wrapper from "@/app/Wrapper";
 import Header from "@/components/Header";
 import SplitText from "@/components/SplitText";
 import TicketButton from "@/components/TicketButton";
+import ContactFormLegal from "@/components/ContactFormLegal";
 import Link from "next/link";
 import Script from "next/script";
 import axios from "axios";
@@ -34,6 +35,7 @@ const ContactForm = memo(function ContactForm() {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
+    const [marketingOptIn, setMarketingOptIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = useCallback(async () => {
@@ -50,6 +52,7 @@ const ContactForm = memo(function ContactForm() {
                 email: email.trim(),
                 phone,
                 message,
+                marketingOptIn,
                 source: "contact-page",
                 status: "new",
             });
@@ -59,6 +62,7 @@ const ContactForm = memo(function ContactForm() {
                 setEmail("");
                 setPhone("");
                 setMessage("");
+                setMarketingOptIn(false);
             } else {
                 toast(res.data?.message || "Submission failed.");
             }
@@ -68,7 +72,7 @@ const ContactForm = memo(function ContactForm() {
         } finally {
             setLoading(false);
         }
-    }, [loading, email, phone, message]);
+    }, [loading, email, phone, message, marketingOptIn]);
 
     return (
         <div className="space-y-2">
@@ -119,10 +123,13 @@ const ContactForm = memo(function ContactForm() {
                 />
             </div>
 
-            <p className="text-sm text-[#0e221c]/90 mb-5">
-                By clicking Let's Bond, you agree to our Terms and Conditions and Privacy
-                Policy
-            </p>
+            <div className="mt-2 mb-5">
+                <ContactFormLegal
+                    marketingOptIn={marketingOptIn}
+                    onMarketingOptInChange={setMarketingOptIn}
+                    disabled={loading}
+                />
+            </div>
 
             <div
                 onClick={handleSubmit}

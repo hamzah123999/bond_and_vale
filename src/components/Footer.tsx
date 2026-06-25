@@ -8,6 +8,7 @@ import TicketButton from "@/components/TicketButton";
 import { ParallaxImage } from "./ParallaxImage";
 import SplitText from "./SplitText";
 import DecryptedText from "./DecryptedText";
+import ContactFormLegal from "./ContactFormLegal";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -40,6 +41,7 @@ const FooterForm = memo(function FooterForm() {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
+    const [marketingOptIn, setMarketingOptIn] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const handleSend = useCallback(async () => {
@@ -56,7 +58,8 @@ const FooterForm = memo(function FooterForm() {
                 email: email.trim(),
                 phone,
                 message,
-                source: "contact-page",
+                marketingOptIn,
+                source: "footer",
                 status: "new",
             });
 
@@ -65,6 +68,7 @@ const FooterForm = memo(function FooterForm() {
                 setEmail("");
                 setPhone("");
                 setMessage("");
+                setMarketingOptIn(false);
             } else {
                 toast(res.data?.message || "Submission failed.");
             }
@@ -75,7 +79,7 @@ const FooterForm = memo(function FooterForm() {
         } finally {
             setLoading(false);
         }
-    }, [loading, email, phone, message]);
+    }, [loading, email, phone, message, marketingOptIn]);
 
     return (
         <div className="space-y-2">
@@ -126,10 +130,13 @@ const FooterForm = memo(function FooterForm() {
                 />
             </div>
 
-            <p className="text-sm text-[#0e221c]/90 mb-5">
-                By clicking Let's Bond, you agree to our Terms and Conditions and Privacy
-                Policy
-            </p>
+            <div className="mt-5 mb-5">
+                <ContactFormLegal
+                    marketingOptIn={marketingOptIn}
+                    onMarketingOptInChange={setMarketingOptIn}
+                    disabled={loading}
+                />
+            </div>
 
             <div onClick={handleSend} className={loading ? "pointer-events-none opacity-70" : ""}>
                 <TicketButton href="#" label={loading ? "Submitting..." : "Let's Bond"} />

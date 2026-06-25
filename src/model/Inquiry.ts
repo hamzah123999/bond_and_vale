@@ -4,6 +4,8 @@ export interface IContactMessage extends Document {
     email: string;
     phone?: string;
     message: string;
+    marketingOptIn?: boolean;
+    marketingOptInAt?: Date | null;
 
     source?: string; // e.g. "contact-page"
     status?: "new" | "read" | "replied";
@@ -30,6 +32,14 @@ const ContactMessageSchema: Schema<IContactMessage> = new Schema(
             type: String,
             required: [true, "Message is required"],
             trim: true,
+        },
+        marketingOptIn: {
+            type: Boolean,
+            default: false,
+        },
+        marketingOptInAt: {
+            type: Date,
+            default: null,
         },
 
         // optional extras (remove if you don't want them)
