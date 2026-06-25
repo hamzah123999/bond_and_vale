@@ -3,7 +3,6 @@
 import TicketButton from "@/components/TicketButton";
 import SplitText from "@/components/SplitText";
 import Header from "@/components/Header";
-import { cloudinaryVideo, VIDEO_WIDTH } from "@/lib/cloudinary";
 import { HERO_BACKGROUND_VIDEOS } from "@/lib/media/service-videos";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -49,17 +48,10 @@ export default function HeroClient() {
         return () => window.clearTimeout(t);
     }, []);
 
+    // Full-resolution sources — hero is full-viewport so quality matters more than compression.
     const videoSrc = useMemo(() => {
-        if (isDesktop === true) {
-            return cloudinaryVideo(HERO_BACKGROUND_VIDEOS.desktop, {
-                width: VIDEO_WIDTH.heroDesktop,
-            });
-        }
-        if (isDesktop === false) {
-            return cloudinaryVideo(HERO_BACKGROUND_VIDEOS.mobile, {
-                width: VIDEO_WIDTH.heroMobile,
-            });
-        }
+        if (isDesktop === true) return HERO_BACKGROUND_VIDEOS.desktop;
+        if (isDesktop === false) return HERO_BACKGROUND_VIDEOS.mobile;
         return null;
     }, [isDesktop]);
 
