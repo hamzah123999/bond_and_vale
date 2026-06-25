@@ -1,50 +1,19 @@
 "use client";
 
-import { useEffect, useLayoutEffect } from "react";
-import { usePathname } from "next/navigation";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-type SplitElement = HTMLElement & {
-    _rbsplitInstance?: { revert?: () => void } | null;
-};
-
-function revertAllSplitText() {
-    document.querySelectorAll(".split-parent").forEach((node) => {
-        const el = node as SplitElement;
-        if (!el._rbsplitInstance?.revert || !el.isConnected) return;
-        try {
-            el._rbsplitInstance.revert();
-        } catch {
-            /* React may already be updating this subtree */
-        }
-        el._rbsplitInstance = null;
-    });
-}
-
-function tearDownGsapAnimations() {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    revertAllSplitText();
-    gsap.killTweensOf(".split-parent, .split-char, .split-word, .split-line");
-}
+import { useEffect } from "react";
 
 /**
- * GSAP SplitText mutates DOM nodes that React also manages. On client-side
- * navigations (especially leaving the homepage) that causes insertBefore crashes.
- * Tear down GSAP on internal link clicks (capture phase) and on route changes.
+ * GSAP SplitText rewrites DOM nodes that React also owns. Next.js client-side
+ * navigation from the homepage leaves both fighting over the same nodes and the
+ * app white-screens. Full page loads avoid that entirely.
  */
 export default function GsapRouteCleanup() {
-    const pathname = usePathname();
-
-    useLayoutEffect(() => {
-        tearDownGsapAnimations();
-        return () => {
-            tearDownGsapAnimations();
-        };
-    }, [pathname]);
-
     useEffect(() => {
         const onClickCapture = (event: MouseEvent) => {
+            if (event.defaultPrevented) return;
+            if (event.button !== 0) return;
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
             const target = event.target;
             if (!(target instanceof Element)) return;
 
@@ -70,7 +39,9 @@ export default function GsapRouteCleanup() {
                 return;
             }
 
-            tearDownGsapAnimations();
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            window.location.assign(url.href);
         };
 
         document.addEventListener("click", onClickCapture, true);
