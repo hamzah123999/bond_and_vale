@@ -1,6 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer";
+import { usePathname } from "next/navigation";
 
 interface Props {
     children: React.ReactNode;
@@ -8,10 +9,12 @@ interface Props {
 }
 
 export default function Wrapper({ children }: Props) {
+    const pathname = usePathname();
+
     return (
         <>
             {children}
-            <Footer />
+            <Footer key={pathname} />
         </>
     );
 }

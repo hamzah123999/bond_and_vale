@@ -113,10 +113,14 @@ const SplitText = ({
         ScrollTrigger.getAll().forEach(st => {
           if (st.trigger === el) st.kill();
         });
-        try {
-          splitInstance.revert();
-        } catch (_) {
-          /* noop */
+        gsap.killTweensOf(el);
+        gsap.killTweensOf(el.querySelectorAll('.split-char, .split-word, .split-line'));
+        if (el.isConnected) {
+          try {
+            splitInstance.revert();
+          } catch (_) {
+            /* React may already be removing this subtree */
+          }
         }
         el._rbsplitInstance = null;
       };

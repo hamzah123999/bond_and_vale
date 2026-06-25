@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import SiteLoader from "@/components/SiteLoader";
+import GsapRouteCleanup from "@/components/GsapRouteCleanup";
 // import "lenis/dist/lenis.css";
 
 const inter = Inter({
@@ -118,6 +119,7 @@ export default function RootLayout({
           />
         </div>
         <SiteLoader />
+        <GsapRouteCleanup />
         {children}
         <Toaster />
       </body>
