@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FadeUp from "@/components/FadeUp";
@@ -28,6 +28,11 @@ export default function ServiceCard({
     const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
     const [videoReady, setVideoReady] = useState(false);
 
+    const videoUrl = useMemo(
+        () => cloudinaryVideo(videoSrc, { width: VIDEO_WIDTH.card }),
+        [videoSrc],
+    );
+
     const showVideo = isHovering && videoReady;
 
     const onEnter = () => {
@@ -41,6 +46,9 @@ export default function ServiceCard({
         if (!v) return;
         v.pause();
         v.currentTime = 0;
+        if (v.readyState < 2) {
+            setVideoReady(false);
+        }
     };
 
     const onVideoReady = () => {
@@ -49,6 +57,14 @@ export default function ServiceCard({
         if (!v || !isHovering) return;
         void v.play().catch(() => {});
     };
+
+    useEffect(() => {
+        if (!shouldLoadVideo || !isHovering) return;
+        const v = videoRef.current;
+        if (!v) return;
+        v.load();
+        void v.play().catch(() => {});
+    }, [shouldLoadVideo, isHovering, videoUrl]);
 
     const servicePath = `/services/${href.replace(/^\//, "")}`;
 
@@ -80,13 +96,9 @@ export default function ServiceCard({
                     ref={videoRef}
                     className={[
                         "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-                        showVideo ? "opacity-100" : "opacity-0",
+                        showVideo ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
                     ].join(" ")}
-                    src={
-                        shouldLoadVideo
-                            ? cloudinaryVideo(videoSrc, { width: VIDEO_WIDTH.card })
-                            : undefined
-                    }
+                    src={shouldLoadVideo ? videoUrl : undefined}
                     muted
                     playsInline
                     loop
