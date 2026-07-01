@@ -5,7 +5,22 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { ArrowRight, Instagram, Facebook, Linkedin } from "lucide-react";
+import DecryptedText from "@/components/DecryptedText";
 import { usePathname } from "next/navigation";
+
+function NavHoverText({ text, light }: { text: string; light: boolean }) {
+  const colorClass = light ? "text-white" : "text-black";
+  return (
+    <DecryptedText
+      text={text}
+      className={`${colorClass} `}
+      useOriginalCharsOnly
+      animateOn="hover"
+      parentClassName={`${colorClass} cursor-pointer`}
+      speed={50}
+    />
+  );
+}
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -173,43 +188,43 @@ export default function Header() {
             {changeColor ? (
               <nav className="navbar-items hidden items-center gap-10 lg:flex">
                 <Link href="/" className="text_rg-button text-black/90 hover:text-black">
-                  Home
+                  <NavHoverText text="Home" light={false} />
                 </Link>
                 <Link
                   href="/services"
                   className="text_rg-button text-black/90 hover:text-black"
                 >
-                  Services
+                  <NavHoverText text="Services" light={false} />
                 </Link>
                 <Link href="/blog" className="text_rg-button text-black/90 hover:text-black">
-                  Blog
+                  <NavHoverText text="Blog" light={false} />
                 </Link>
                 <Link
                   href="/contact"
                   className="text_rg-button text-black/90 hover:text-black"
                 >
-                  Contact
+                  <NavHoverText text="Contact" light={false} />
                 </Link>
               </nav>
             ) : (
               <nav className="navbar-items hidden items-center gap-10 lg:flex">
                 <Link href="/" className="text_rg-button text-white/90 hover:text-white">
-                  Home
+                  <NavHoverText text="Home" light={true} />
                 </Link>
                 <Link
                   href="/services"
                   className="text_rg-button text-white/90 hover:text-white"
                 >
-                  Services
+                  <NavHoverText text="Services" light={true} />
                 </Link>
                 <Link href="/blog" className="text_rg-button text-white/90 hover:text-white">
-                  Blog
+                  <NavHoverText text="Blog" light={true} />
                 </Link>
                 <Link
                   href="/contact"
                   className="text_rg-button text-white/90 hover:text-white"
                 >
-                  Contact
+                  <NavHoverText text="Contact" light={true} />
                 </Link>
               </nav>
             )}
@@ -221,7 +236,9 @@ export default function Header() {
                   className="contact-button hidden items-center gap-3 lg:inline-flex"
                   onClick={closeMenu}
                 >
-                  <div className="text-black/90 hover:text-black">Let&apos;s Bond</div>
+                  <div className="text-black/90 hover:text-black">
+                    <NavHoverText text="Let's Bond" light={false} />
+                  </div>
                   <ArrowRight className="h-4 w-4 text-black/90" />
                 </Link>
 
@@ -232,7 +249,7 @@ export default function Header() {
                   aria-controls={navId}
                   onClick={toggleMenu}
                 >
-                  menu
+                  <NavHoverText text="menu" light={false} />
                 </button>
               </div>
             ) : (
@@ -242,7 +259,9 @@ export default function Header() {
                   className="contact-button hidden items-center gap-3 lg:inline-flex"
                   onClick={closeMenu}
                 >
-                  <div className="text-white/90 hover:text-white">Let&apos;s Bond</div>
+                  <div className="text-white/90 hover:text-white">
+                    <NavHoverText text="Let's Bond" light={true} />
+                  </div>
                   <ArrowRight className="h-4 w-4 text-white/90" />
                 </Link>
 
@@ -253,7 +272,7 @@ export default function Header() {
                   aria-controls={navId}
                   onClick={toggleMenu}
                 >
-                  menu
+                  <NavHoverText text="menu" light={true} />
                 </button>
               </div>
             )}
@@ -360,7 +379,7 @@ export default function Header() {
                     onClick={closeMenu}
                     className="absolute right-0 top-0 inline-flex cursor-pointer items-center gap-2 text-white/90 hover:text-white"
                   >
-                    close
+                    <NavHoverText text="close" light={true} />
                   </button>
                 </div>
 
